@@ -1,0 +1,31 @@
+name: aspartec_plus
+description: "A simple Flutter application to provide academic advice at ITSCH."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.7.0
+
+dependencies:
+  cloud_firestore: ^5.6.5
+  firebase_auth: ^5.5.1
+  firebase_core: ^3.12.1
+  firebase_messaging: ^15.2.4
+  firebase_storage: ^12.4.4
+  flutter:
+    sdk: flutter
+  flutter_riverpod: ^2.6.1
+  go_router: ^14.8.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/icons/
+    - assets/pictures/
+    - assets/logos/
