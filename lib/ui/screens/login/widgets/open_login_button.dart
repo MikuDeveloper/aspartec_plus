@@ -12,10 +12,7 @@ class GoToLoginButton extends StatelessWidget {
     final brightness = Theme.of(context).brightness;
     
     return ElevatedButton(
-      onPressed: () => showModalBottomSheet(
-        barrierColor: Colors.transparent,
-        useSafeArea: true,
-        isScrollControlled: true,
+      onPressed: () => showBottomSheet(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
           side: BorderSide(

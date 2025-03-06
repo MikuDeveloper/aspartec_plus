@@ -1,35 +1,66 @@
-
-import 'package:flutter/material.dart' show Colors, DropdownMenuEntry, Icon, Icons;
+import 'package:flutter/material.dart' show DropdownMenuItem, Text;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show Provider;
+import 'package:reactive_forms/reactive_forms.dart' show FormGroup, FormControl, Validators;
 
-import '../global/forms.dart';
-import '../global/values.dart' show genders, majors, Role;
+import '../global/values.dart' show formattedPhoneNumberRegex, genders, majors, passwordRegex;
 
-final loginFormProvider = Provider.autoDispose((ref) => loginForm);
-final forgotPasswordFormProvider = Provider.autoDispose((ref) => forgotPasswordForm);
-final personalDataFormProvider = Provider.autoDispose((ref) => personalDataForm);
-final schoolDataFormProvider = Provider.autoDispose((ref) => schoolDataForm);
-final credentialsFormProvider = Provider.autoDispose((ref) => credentialsForm);
+final loginFormProvider = Provider.autoDispose(
+  (ref) => FormGroup({
+    'email': FormControl<String>(value: '', validators: [Validators.required, Validators.email]),
+    'password': FormControl<String>(value: '', validators: [Validators.required])
+  })
+);
+
+final forgotPasswordFormProvider = Provider.autoDispose(
+  (ref) => FormGroup({
+    'forgotEmail': FormControl<String>(
+      value: '',
+      validators: [Validators.required, Validators.email]
+    )
+  })
+);
+
+final personalDataFormProvider = Provider.autoDispose(
+  (ref) => FormGroup({
+    'firstname': FormControl<String>(value: '', validators: [Validators.required]),
+    'lastname1': FormControl<String>(value: '', validators: [Validators.required]),
+    'lastname2': FormControl<String>(value: ''),
+    'gender': FormControl<String>(value: '', validators: [Validators.required]),
+    'phoneNumber': FormControl<String>(value: '', validators: [
+      Validators.required,
+      Validators.pattern(formattedPhoneNumberRegex)
+    ])
+  })
+);
+
+final schoolDataFormProvider = Provider.autoDispose(
+  (ref) => FormGroup({
+    'major': FormControl<String>(value: '', validators: [Validators.required]),
+    'controlNumber': FormControl<String>(value: '', validators: [Validators.required])
+  })
+);
+
+final credentialsFormProvider = Provider.autoDispose(
+  (ref) => FormGroup({
+    'email': FormControl<String>(value: '', validators: [Validators.required, Validators.email]),
+    'password': FormControl<String>(value: '', validators: [
+      Validators.required,
+      Validators.pattern(passwordRegex)
+    ])
+  })
+);
 
 final genderEntriesProvider = Provider.autoDispose(
   (ref) => genders.map(
-    (gender) => DropdownMenuEntry(
-      leadingIcon: switch(gender) {
-        'Hombre' => const Icon(Icons.male_rounded, color: Colors.blueAccent),
-        'Mujer' => const Icon(Icons.female_rounded, color: Colors.pinkAccent),
-        'No binario' => const Icon(Icons.transgender_rounded, color: Colors.amberAccent),
-        _ => const Icon(Icons.question_mark_rounded, color: Colors.blueGrey)
-      },
+    (gender) => DropdownMenuItem(
       value: gender,
-      label: gender
+      child: Text(gender)
     )
   ).toList()
 );
 
 final majorEntriesProvider = Provider.autoDispose(
   (ref) => majors.map(
-    (major) => DropdownMenuEntry(value: major, label: major)
+    (major) => DropdownMenuItem(value: major, child: Text(major))
   ).toList()
 );
-
-final selectedRoleProvider = Provider.autoDispose<Role?>((ref) => null);

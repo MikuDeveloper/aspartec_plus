@@ -1,6 +1,6 @@
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/form_providers.dart' show loginFormProvider;
-import 'package:aspartec_plus/ui/shared/index.dart' show DragHandler, EmailReactiveField, SimplePasswordReactiveField;
+import 'package:aspartec_plus/ui/shared/index.dart' show DragHandler, ReactiveEmailField, SimplePasswordReactiveField;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
 import 'package:go_router/go_router.dart';
@@ -27,7 +27,7 @@ class LoginReactiveForm extends ConsumerWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Divider(thickness: 2),
-          const EmailReactiveField(formControlName: 'email'),
+          const ReactiveEmailField(formControlName: 'email', textInputAction: TextInputAction.next),
           const SimplePasswordReactiveField(formControlName: 'password'),
           TextButton(
             onPressed: () => context.pushNamed('forgot-password'),

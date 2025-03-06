@@ -1,9 +1,9 @@
 import 'package:aspartec_plus/app/global/assets.dart';
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
-import 'package:aspartec_plus/ui/shared/index.dart' show EmailReactiveField;
+import 'package:aspartec_plus/ui/shared/index.dart' show ReactiveEmailField;
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart' show FormControl, FormGroup, ReactiveForm, Validators;
-import 'package:svg_flutter/svg.dart';
+import 'package:svg_flutter/svg_flutter.dart';
 
 import 'widgets/send_email_button.dart';
 
@@ -46,7 +46,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   Text(
                     'Le enviaremos un mensaje a su dirección de correo electrónico, donde podrá reestablecer su contraseña.'
                   ),
-                  EmailReactiveField(formControlName: 'recovery-email'),
+                  ReactiveEmailField(formControlName: 'recovery-email'),
                   const SendEmailButton()
                 ],
               ),

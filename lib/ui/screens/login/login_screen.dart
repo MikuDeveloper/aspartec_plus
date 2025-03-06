@@ -13,9 +13,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final circles = getBackgroundCircles(MediaQuery.of(context).size);
 
-    return Scaffold(
-      body: SafeArea(
-        child: Stack(
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
           children: [
             for (int i = 0; i < circles.length; i++) circles[i],
             const Align(
