@@ -2,6 +2,10 @@ const double defaultPadding = 16.0;
 
 enum Role { asesor, estudiante }
 
+enum AdviceFilters {
+  opened, completed, canceled, forRating
+}
+
 final Set<String> genders = {
   'Hombre', 'Mujer', 'No binario', 'Otro'
 };

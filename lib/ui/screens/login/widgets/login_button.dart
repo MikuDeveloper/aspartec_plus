@@ -1,5 +1,6 @@
 import 'package:aspartec_plus/app/global/colors.dart' show seedColor;
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart' show AbstractControl, ReactiveForm;
 
 class LoginButton extends StatelessWidget {
@@ -10,7 +11,7 @@ class LoginButton extends StatelessWidget {
     final loginForm = ReactiveForm.of(context);
 
     return ElevatedButton(
-      onPressed: () => _login(loginForm),
+      onPressed: () => _login(context, loginForm),
       style: ElevatedButton.styleFrom(
         backgroundColor: seedColor,
         foregroundColor: Colors.white,
@@ -21,11 +22,12 @@ class LoginButton extends StatelessWidget {
     );
   }
 
-  void _login(AbstractControl? form) {
+  void _login(BuildContext context, AbstractControl? form) {
     if (form != null && form.valid) {
       // TODO: Add logic to access.
 
       form.reset();
+      context.goNamed('home');
     }
   }
 }
