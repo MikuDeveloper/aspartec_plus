@@ -1,4 +1,4 @@
-import 'package:aspartec_plus/app/global/values.dart' show Role;
+import 'package:aspartec_plus/app/global/values.dart' show Role, UserStatus;
 
 class AspartecUser {
   final Role _role;
@@ -11,6 +11,7 @@ class AspartecUser {
   final String _phoneNumber;
   final String _avatarUrl;
   final List<String> _adviceTaught;
+  final UserStatus _status;
 
   Role get role => _role;
   String get controlNumber => _controlNumber;
@@ -22,6 +23,7 @@ class AspartecUser {
   String get phoneNumber => _phoneNumber;
   String get avatarUrl => _avatarUrl;
   List<String> get adviceTaught => _adviceTaught;
+  UserStatus get status => _status;
 
   AspartecUser({
     required Role role,
@@ -33,7 +35,8 @@ class AspartecUser {
     required String gender,
     required String phoneNumber,
     required String avatarUrl,
-    required List<String> adviceTaught
+    required List<String> adviceTaught,
+    required UserStatus status
   }) :
   _role = role,
   _controlNumber = controlNumber,
@@ -44,7 +47,8 @@ class AspartecUser {
   _gender = gender,
   _phoneNumber = phoneNumber,
   _avatarUrl = avatarUrl,
-  _adviceTaught = adviceTaught;
+  _adviceTaught = adviceTaught,
+  _status = status;
 
   AspartecUser copyWith({
     Role? role,
@@ -56,7 +60,8 @@ class AspartecUser {
     String? gender,
     String? phoneNumber,
     String? avatarUrl,
-    List<String>? adviceTaught
+    List<String>? adviceTaught,
+    UserStatus? status
   }) =>
   AspartecUser(
     role: role ?? _role,
@@ -68,7 +73,8 @@ class AspartecUser {
     gender: gender ?? _gender,
     phoneNumber: phoneNumber ?? _phoneNumber,
     avatarUrl: avatarUrl ?? _avatarUrl,
-    adviceTaught: adviceTaught ?? _adviceTaught
+    adviceTaught: adviceTaught ?? _adviceTaught,
+    status: status ?? _status
   );
 
   factory AspartecUser.fromJson(Map<String, dynamic> json) => AspartecUser(
@@ -84,7 +90,12 @@ class AspartecUser {
     gender: json.containsKey('gender') ? json['gender'] : '',
     phoneNumber: json.containsKey('phoneNumber') ? json['phoneNumber'] : '',
     avatarUrl: json.containsKey('avatarUrl') ? json['avatarUrl'] : '',
-    adviceTaught: json.containsKey('adviceTaught') ? json['adviceTaught'] : []
+    adviceTaught: json.containsKey('adviceTaught') ? json['adviceTaught'] : [],
+    status: json.containsKey('status') ? switch(json['staus']) {
+      'active' => UserStatus.active,
+      _ => UserStatus.inactive
+    } 
+    : UserStatus.inactive
   );
 
   Map<String, dynamic> toJson() {
@@ -99,6 +110,7 @@ class AspartecUser {
     map['phoneNumber'] = _phoneNumber;
     map['avatarUrl'] = _avatarUrl;
     map['adviceTaught'] = _adviceTaught;
+    map['status'] = _status.name;
     return map;
   }
 }

@@ -1,5 +1,5 @@
 import 'package:aspartec_plus/app/global/assets.dart';
-import 'package:aspartec_plus/app/global/values.dart' show AdviceFilters, Role, defaultPadding;
+import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role, defaultPadding;
 import 'package:aspartec_plus/app/providers/advice_providers.dart';
 import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceFilterProvider;
 import 'package:flutter/material.dart';
@@ -21,10 +21,10 @@ class AdvisorPage extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: switch(filter) {
-        AdviceFilters.opened => () => ref.refresh(advisorOpenedAdviceProvider.future),
-        AdviceFilters.completed => () => ref.refresh(advisorCompletedAdviceProvider.future),
-        AdviceFilters.canceled => () => ref.refresh(advisorCanceledAdviceProvider.future),
-        AdviceFilters.forRating => () => ref.refresh(advisorForRatingAdviceProvider.future)
+        AdviceStatus.opened => () => ref.refresh(advisorOpenedAdviceProvider.future),
+        AdviceStatus.completed => () => ref.refresh(advisorCompletedAdviceProvider.future),
+        AdviceStatus.canceled => () => ref.refresh(advisorCanceledAdviceProvider.future),
+        AdviceStatus.forRating => () => ref.refresh(advisorForRatingAdviceProvider.future)
       },
       child: CustomScrollView(
         slivers: [
@@ -45,10 +45,10 @@ class AdvisorPage extends ConsumerWidget {
             ),
           ),
           switch (filter) {
-            AdviceFilters.opened => const OpenedAdviceList(),
-            AdviceFilters.completed => const CompletedAdviceList(),
-            AdviceFilters.canceled => const CanceledAdviceList(),
-            AdviceFilters.forRating => const ForRatingAdviceList()
+            AdviceStatus.opened => const OpenedAdviceList(),
+            AdviceStatus.completed => const CompletedAdviceList(),
+            AdviceStatus.canceled => const CanceledAdviceList(),
+            AdviceStatus.forRating => const ForRatingAdviceList()
           }
         ],
       ),

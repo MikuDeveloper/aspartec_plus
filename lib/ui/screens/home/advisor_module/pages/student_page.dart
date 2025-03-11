@@ -1,5 +1,5 @@
 import 'package:aspartec_plus/app/global/assets.dart';
-import 'package:aspartec_plus/app/global/values.dart' show AdviceFilters, Role, defaultPadding;
+import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role, defaultPadding;
 import 'package:aspartec_plus/app/providers/advice_providers.dart';
 import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceFilterProvider;
 import 'package:flutter/material.dart';
@@ -17,10 +17,10 @@ class StudentPage extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: switch(filter) {
-        AdviceFilters.opened => () => ref.refresh(studentOpenedAdviceProvider.future),
-        AdviceFilters.completed => () => ref.refresh(studentCompletedAdviceProvider.future),
-        AdviceFilters.canceled => () => ref.refresh(studentCanceledAdviceProvider.future),
-        AdviceFilters.forRating => () => ref.refresh(studentForRatingAdviceProvider.future)
+        AdviceStatus.opened => () => ref.refresh(studentOpenedAdviceProvider.future),
+        AdviceStatus.completed => () => ref.refresh(studentCompletedAdviceProvider.future),
+        AdviceStatus.canceled => () => ref.refresh(studentCanceledAdviceProvider.future),
+        AdviceStatus.forRating => () => ref.refresh(studentForRatingAdviceProvider.future)
       },
       child: CustomScrollView(
         slivers: [
