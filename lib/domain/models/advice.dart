@@ -1,5 +1,5 @@
 import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, getStatus, setStatus;
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentReference;
+import 'package:cloud_firestore/cloud_firestore.dart' show DocumentReference, Timestamp;
 
 import 'aspartec_user.dart';
 
@@ -10,8 +10,8 @@ class Advice {
   final AdviceStatus _status;
   final DocumentReference _advisorRef;
   final DocumentReference _studentRef;
-  final String _startDate;
-  final String _endDate;
+  final DateTime _startDate;
+  final DateTime _endDate;
   final double _advisorRating;
   final double _studentRating;
   final String _evidenceUrl;
@@ -22,8 +22,8 @@ class Advice {
   AdviceStatus get status => _status;
   DocumentReference get advisorRef => _advisorRef;
   DocumentReference get studentRef => _studentRef;
-  String get startDate => _startDate;
-  String get endDate => _endDate;
+  DateTime get startDate => _startDate;
+  DateTime get endDate => _endDate;
   double get advisorRating => _advisorRating;
   double get studentRating => _studentRating;
   String get evidenceUrl => _evidenceUrl;
@@ -35,8 +35,8 @@ class Advice {
     required AdviceStatus status,
     required DocumentReference advisorRef,
     required DocumentReference studentRef,
-    required String startDate,
-    required String endDate,
+    required DateTime startDate,
+    required DateTime endDate,
     required double advisorRating,
     required double studentRating,
     required String evidenceUrl
@@ -60,8 +60,8 @@ class Advice {
     AdviceStatus? status,
     DocumentReference? advisorRef,
     DocumentReference? studentRef,
-    String? startDate,
-    String? endDate,
+    DateTime? startDate,
+    DateTime? endDate,
     double? advisorRating,
     double? studentRating,
     String? evidenceUrl
@@ -95,8 +95,8 @@ class Advice {
         fromFirestore: (snapshot, _) => AspartecUser.fromJson(snapshot.data() ?? {}),
         toFirestore: (model, _) => model.toJson()
       ),
-    startDate: json.containsKey('startDate') ? json['startDate'] : '',
-    endDate: json.containsKey('endDate') ? json['endDate'] : '',
+    startDate: json.containsKey('startDate') ? (json['startDate'] as Timestamp).toDate() : DateTime.now(),
+    endDate: json.containsKey('endDate') ? (json['endDate'] as Timestamp).toDate() : DateTime.now(),
     advisorRating: json.containsKey('advisorRating') ? json['advisorRating'] : 0.0,
     studentRating: json.containsKey('studentRating') ? json['studentRating'] : 0.0,
     evidenceUrl: json.containsKey('evidenceUrl') ? json['evidenceUrl'] : ''
@@ -110,8 +110,8 @@ class Advice {
     map['status'] = getStatus(_status);
     map['advisorRef'] = _advisorRef;
     map['studentRef'] = _studentRef;
-    map['startDate'] = _startDate;
-    map['endDate'] = _endDate;
+    map['startDate'] = Timestamp.fromDate(_startDate);
+    map['endDate'] = Timestamp.fromDate(_startDate);
     map['advisorRating'] = _advisorRating;
     map['studentRating'] = _studentRating;
     map['evidenceUrl'] = _evidenceUrl;
