@@ -1,9 +1,12 @@
-import 'package:aspartec_plus/app/providers/advice_providers.dart';
+import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role;
+import 'package:aspartec_plus/app/providers/home_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart' show FontAwesomeIcons;
 
+import '../../widgets/sliver_error.dart';
+import '../../widgets/sliver_loading.dart';
 import '../widgets/advice_list_tile.dart';
 
 class OpenedAdviceList extends ConsumerWidget {
@@ -11,7 +14,11 @@ class OpenedAdviceList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(advisorOpenedAdviceProvider).when(
+    final openedAdvice = ref.watch(adviceProvider((Role.asesor, AdviceStatus.opened)));
+
+    return openedAdvice.when(
+      loading: () => const SliverLoading(),
+      error: (_, __) => const SliverError(),
       data: (_) => SliverList.separated(
         separatorBuilder: (context, index) => const Divider(),
         itemCount: 2,
@@ -47,12 +54,6 @@ class OpenedAdviceList extends ConsumerWidget {
             topic: 'Transformada de Laplace'
           )
         )
-      ),
-      error: (_, __) => SliverFillRemaining(
-        child: Center(child: Text('Error')),
-      ),
-      loading: () => SliverFillRemaining(
-        child: Center(child: CircularProgressIndicator()),
       )
     );
   }

@@ -90,12 +90,12 @@ class AspartecUser {
     gender: json.containsKey('gender') ? json['gender'] : '',
     phoneNumber: json.containsKey('phoneNumber') ? json['phoneNumber'] : '',
     avatarUrl: json.containsKey('avatarUrl') ? json['avatarUrl'] : '',
-    adviceTaught: json.containsKey('adviceTaught') ? json['adviceTaught'] : [],
-    status: json.containsKey('status') ? switch(json['staus']) {
+    adviceTaught: json.containsKey('adviceTaught') ? List<String>.from(json['adviceTaught']) : [],
+    status: json.containsKey('status') ? switch(json['status']) {
       'active' => UserStatus.active,
       _ => UserStatus.inactive
     } 
-    : UserStatus.inactive
+    : UserStatus.active
   );
 
   Map<String, dynamic> toJson() {
@@ -107,7 +107,7 @@ class AspartecUser {
     map['lastname1'] = _lastname1;
     map['lastname2'] = _lastname2;
     map['gender'] = _gender;
-    map['phoneNumber'] = _phoneNumber;
+    map['phoneNumber'] = _phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
     map['avatarUrl'] = _avatarUrl;
     map['adviceTaught'] = _adviceTaught;
     map['status'] = _status.name;

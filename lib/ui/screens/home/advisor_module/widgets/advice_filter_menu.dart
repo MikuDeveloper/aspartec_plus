@@ -10,12 +10,6 @@ class AdviceFilterMenu extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final filter = role == Role.estudiante 
-    //   ? ref.watch(studentAdviceFilterProvider)
-    //   : ref.watch(advisorAdviceFilterProvider);
-    // final filterNotifier = role == Role.estudiante 
-    //   ? ref.watch(studentAdviceFilterProvider.notifier)
-    //   : ref.read(advisorAdviceFilterProvider.notifier);
     final filter = ref.watch(adviceFilterProvider(role));
     final filterNotifier = ref.watch(adviceFilterProvider(role).notifier);
 

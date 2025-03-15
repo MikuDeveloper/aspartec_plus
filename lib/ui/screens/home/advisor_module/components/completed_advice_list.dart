@@ -1,14 +1,22 @@
-import 'package:aspartec_plus/app/providers/advice_providers.dart';
-import 'package:aspartec_plus/ui/screens/home/advisor_module/widgets/advice_list_tile.dart';
+import 'package:aspartec_plus/app/global/values.dart';
+import 'package:aspartec_plus/app/providers/home_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../widgets/sliver_error.dart';
+import '../../widgets/sliver_loading.dart';
+import '../widgets/advice_list_tile.dart';
 
 class CompletedAdviceList extends ConsumerWidget {
   const CompletedAdviceList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(advisorCompletedAdviceProvider).when(
+    final completedAdvice = ref.watch(adviceProvider((Role.asesor, AdviceStatus.completed)));
+
+    return completedAdvice.when(
+      error: (_, __) => const SliverError(),
+      loading: () => const SliverLoading(),
       data: (_) => SliverList.separated(
         itemCount: 2,
         separatorBuilder: (_, _) => const Divider(),
@@ -19,12 +27,6 @@ class CompletedAdviceList extends ConsumerWidget {
           topic: 'Rojas'
         )
       ), 
-      error: (_, __) => SliverFillRemaining(
-        child: Center(child: Text('Error')),
-      ),
-      loading: () => SliverFillRemaining(
-        child: Center(child: CircularProgressIndicator()),
-      )
     );
   }
 }

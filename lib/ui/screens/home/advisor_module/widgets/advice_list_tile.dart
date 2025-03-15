@@ -1,3 +1,4 @@
+import 'package:aspartec_plus/ui/shared/index.dart' show ProfileAvatar;
 import 'package:flutter/material.dart';
 
 class AdviceListTile extends StatelessWidget {
@@ -20,18 +21,14 @@ class AdviceListTile extends StatelessWidget {
       onTap: () {},
       title: Row(
         children: [
-          // TODO: Change for custom avatar component.
-          CircleAvatar(
-            radius: 20,
-            backgroundImage: NetworkImage('https://th.bing.com/th/id/OIP.KKc5uj3THYrdX-PARqUaSAHaKe?rs=1&pid=ImgDetMain')
-          ),
+          const ProfileAvatar(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(username),
             ),
           ),
-          Text(date,style: Theme.of(context).textTheme.labelSmall)
+          Text(date, style: Theme.of(context).textTheme.labelSmall)
         ],
       ),
       subtitle: Padding(

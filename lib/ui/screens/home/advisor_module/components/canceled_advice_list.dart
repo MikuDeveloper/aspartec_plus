@@ -1,15 +1,23 @@
-import 'package:aspartec_plus/app/providers/advice_providers.dart';
-import 'package:aspartec_plus/ui/screens/home/advisor_module/widgets/advice_list_tile.dart';
+import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role;
+import 'package:aspartec_plus/app/providers/home_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../widgets/sliver_error.dart';
+import '../../widgets/sliver_loading.dart';
+import '../widgets/advice_list_tile.dart';
 
 class CanceledAdviceList extends ConsumerWidget {
   const CanceledAdviceList({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(advisorCanceledAdviceProvider).when(
-        data: (_) => SliverList.separated(
+    final canceledAdvice = ref.watch(adviceProvider((Role.asesor, AdviceStatus.canceled)));
+
+    return canceledAdvice.when(
+      loading: () => const SliverLoading(),
+      error: (_, __) => const SliverError(),
+      data: (_) => SliverList.separated(
         itemCount: 2,
         separatorBuilder: (_, _) => const Divider(),
         itemBuilder: (context, index) => AdviceListTile(
@@ -18,12 +26,6 @@ class CanceledAdviceList extends ConsumerWidget {
           subject: 'Amarillo',
           topic: 'Amarillo'
         )
-      ),
-      error: (_, __) => SliverFillRemaining(
-        child: Center(child: Text('Error')),
-      ),
-      loading: () => SliverFillRemaining(
-        child: Center(child: CircularProgressIndicator()),
       )
     );
   }

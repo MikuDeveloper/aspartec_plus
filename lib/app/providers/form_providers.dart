@@ -13,7 +13,7 @@ final loginFormProvider = Provider.autoDispose(
 
 final forgotPasswordFormProvider = Provider.autoDispose(
   (ref) => FormGroup({
-    'forgotEmail': FormControl<String>(
+    'recoveryEmail': FormControl<String>(
       value: '',
       validators: [Validators.required, Validators.email]
     )
