@@ -1,6 +1,7 @@
 import 'package:aspartec_plus/app/global/assets.dart';
 import 'package:aspartec_plus/app/global/colors.dart' show seedColor;
-import 'package:aspartec_plus/app/global/values.dart' show Role, defaultPadding;
+import 'package:aspartec_plus/app/global/enums.dart' show Role;
+import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/register_providers.dart' show selectedRoleProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
@@ -56,7 +57,7 @@ class RoleCard extends ConsumerWidget {
   }
 
   SvgPicture _setPicture(Role role) => switch (role) {
-    Role.asesor => SvgPicture.asset(Assets.advisorRolePicture),
-    Role.estudiante => SvgPicture.asset(Assets.studentRolePicture),
+    Role.advisor => SvgPicture.asset(Assets.advisorRolePicture),
+    Role.student => SvgPicture.asset(Assets.studentRolePicture),
   };
 }

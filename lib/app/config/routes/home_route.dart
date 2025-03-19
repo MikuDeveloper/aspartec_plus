@@ -2,6 +2,8 @@ import 'package:aspartec_plus/ui/screens/index.dart' show HomeScreen;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'register_subject_route.dart';
+
 final homeRoute = GoRoute(
   path: '/home',
   name: 'home',
@@ -20,5 +22,7 @@ final homeRoute = GoRoute(
     transitionDuration: const Duration(milliseconds: 400),
     reverseTransitionDuration: const Duration(milliseconds: 400)
   ),
-  routes: []
+  routes: [
+    registerSubjectRoute
+  ]
 );

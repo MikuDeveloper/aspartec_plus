@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class Dialogs {
   Dialogs._();
@@ -11,6 +12,24 @@ class Dialogs {
         child: Center(
           child: CircularProgressIndicator.adaptive(),
         ),
+      )
+    );
+
+  static Future<bool?> showDecisiveDialog(BuildContext context, String title, String decision) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title, textAlign: TextAlign.center),
+        content: Text(decision),
+        actions: [
+          TextButton(
+            onPressed: () => context.pop(false),
+            child: const Text('Cancelar')
+          ),
+          FilledButton(
+            onPressed: () => context.pop(true),
+            child: const Text('Aceptar')
+          )
+        ],
       )
     );
 }

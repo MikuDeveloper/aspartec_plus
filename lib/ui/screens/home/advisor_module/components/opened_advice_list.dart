@@ -1,5 +1,6 @@
-import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role;
-import 'package:aspartec_plus/app/providers/home_providers.dart';
+import 'package:aspartec_plus/app/global/enums.dart' show Role, AdviceStatus;
+import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceProvider;
+import 'package:aspartec_plus/ui/shared/index.dart' show EntryAnimation;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -14,7 +15,7 @@ class OpenedAdviceList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final openedAdvice = ref.watch(adviceProvider((Role.asesor, AdviceStatus.opened)));
+    final openedAdvice = ref.watch(adviceProvider((Role.advisor, AdviceStatus.opened)));
 
     return openedAdvice.when(
       loading: () => const SliverLoading(),
@@ -22,37 +23,40 @@ class OpenedAdviceList extends ConsumerWidget {
       data: (_) => SliverList.separated(
         separatorBuilder: (context, index) => const Divider(),
         itemCount: 2,
-        itemBuilder: (context, index) => Slidable(
-          startActionPane: ActionPane(
-            motion: const DrawerMotion(),
-            children: [
-              SlidableAction(
-                padding: EdgeInsets.all(4),
-                onPressed: (context) {},
-                icon: FontAwesomeIcons.whatsapp,
-                label: 'WhatsApp',
-                backgroundColor: Colors.green,
-              )
-            ]
+        itemBuilder: (context, index) => EntryAnimation(
+          beginOffset: index / 2 == 0 ? const Offset(-1, 0) : const Offset(1, 0),
+          child: Slidable(
+            startActionPane: ActionPane(
+              motion: const DrawerMotion(),
+              children: [
+                SlidableAction(
+                  padding: EdgeInsets.all(4),
+                  onPressed: (context) {},
+                  icon: FontAwesomeIcons.whatsapp,
+                  label: 'WhatsApp',
+                  backgroundColor: Colors.green,
+                )
+              ]
+            ),
+            endActionPane: ActionPane(
+              motion: const DrawerMotion(),
+              children: [
+                SlidableAction(
+                  padding: EdgeInsets.all(4),
+                  onPressed: (context) {},
+                  icon: Icons.check_circle_rounded,
+                  label: 'Cerrar asesoría',
+                  backgroundColor: Colors.blue,
+                ),
+              ]
+            ),
+            child: AdviceListTile(
+              username: 'Hatsune Miku',
+              date: '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
+              subject: 'Ecuaciones',
+              topic: 'Transformada de Laplace'
+            )
           ),
-          endActionPane: ActionPane(
-            motion: const DrawerMotion(),
-            children: [
-              SlidableAction(
-                padding: EdgeInsets.all(4),
-                onPressed: (context) {},
-                icon: Icons.check_circle_rounded,
-                label: 'Cerrar asesoría',
-                backgroundColor: Colors.blue,
-              ),
-            ]
-          ),
-          child: AdviceListTile(
-            username: 'Hatsune Miku',
-            date: '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}',
-            subject: 'Ecuaciones',
-            topic: 'Transformada de Laplace'
-          )
         )
       )
     );

@@ -46,9 +46,10 @@ class RegisterButton extends ConsumerWidget {
 
         Dialogs.showLoadingDialog(context);
         final aspartecUser = AspartecUser.fromJson({
-          ...{'role' : selectedRole},
-          ...(personalDataForm.value as Map<String, dynamic>),
-          ...(schoolDataForm.value as Map<String, dynamic>),
+          ...{'role' : selectedRole.displayName},
+          ...(personalDataForm.value as Map<String, dynamic>).map((k, v) => MapEntry(k, (v as String).trim())),
+          ...(schoolDataForm.value as Map<String, dynamic>).map((k, v) => MapEntry(k, (v as String).trim())),
+          ...{'enabled' : true}
         });
         
         registerUser(context, ref, aspartecUser, crendentialsForm.value);

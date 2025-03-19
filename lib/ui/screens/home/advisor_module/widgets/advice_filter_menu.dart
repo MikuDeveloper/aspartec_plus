@@ -1,4 +1,4 @@
-import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role;
+import 'package:aspartec_plus/app/global/enums.dart' show Role, AdviceStatus;
 import 'package:aspartec_plus/app/providers/home_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
@@ -32,13 +32,14 @@ class AdviceFilterMenu extends ConsumerWidget {
             ? const Icon(Icons.circle_rounded, size: 12, color: Colors.green) : null,
           child: const Text('Completadas'),
         ),
-        MenuItemButton(
-          onPressed: () => filterNotifier.state = AdviceStatus.canceled,
-          leadingIcon: filter == AdviceStatus.canceled 
-            ? const Icon(Icons.circle_rounded, size: 12, color: Colors.red) : null,
-          child: const Text('Canceladas'),
-        ),
-        if (role == Role.estudiante)
+        if (role == Role.advisor)
+          MenuItemButton(
+            onPressed: () => filterNotifier.state = AdviceStatus.canceled,
+            leadingIcon: filter == AdviceStatus.canceled 
+              ? const Icon(Icons.circle_rounded, size: 12, color: Colors.red) : null,
+            child: const Text('Canceladas'),
+          ),
+        if (role == Role.student)
           MenuItemButton(
             onPressed: () => filterNotifier.state = AdviceStatus.forRating,
             leadingIcon: filter == AdviceStatus.forRating 

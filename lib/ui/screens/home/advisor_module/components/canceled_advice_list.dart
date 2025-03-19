@@ -1,5 +1,5 @@
-import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role;
-import 'package:aspartec_plus/app/providers/home_providers.dart';
+import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus, Role;
+import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,7 +12,7 @@ class CanceledAdviceList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final canceledAdvice = ref.watch(adviceProvider((Role.asesor, AdviceStatus.canceled)));
+    final canceledAdvice = ref.watch(adviceProvider((Role.advisor, AdviceStatus.canceled)));
 
     return canceledAdvice.when(
       loading: () => const SliverLoading(),

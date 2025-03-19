@@ -1,5 +1,6 @@
 import 'package:aspartec_plus/app/global/assets.dart';
-import 'package:aspartec_plus/app/global/values.dart' show Role, defaultPadding;
+import 'package:aspartec_plus/app/global/enums.dart' show Role;
+import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceFilterProvider, adviceProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
@@ -12,10 +13,10 @@ class StudentPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final filter = ref.watch(adviceFilterProvider(Role.estudiante));
+    final filter = ref.watch(adviceFilterProvider(Role.student));
 
     return RefreshIndicator(
-      onRefresh: () => ref.refresh(adviceProvider((Role.estudiante, filter)).future),
+      onRefresh: () => ref.refresh(adviceProvider((Role.student, filter)).future),
       child: CustomScrollView(
         slivers: [
           const SliverAppbarPage(
@@ -29,7 +30,7 @@ class StudentPage extends ConsumerWidget {
                 spacing: defaultPadding,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  AdviceFilterMenu(role: Role.estudiante)
+                  AdviceFilterMenu(role: Role.student)
                 ],
               )
             ),

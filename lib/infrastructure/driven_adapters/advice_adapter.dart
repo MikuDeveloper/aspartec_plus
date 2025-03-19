@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role, getStatus;
+import 'package:aspartec_plus/app/global/enums.dart' show Role, AdviceStatus;
 import 'package:aspartec_plus/infrastructure/helpers/functions.dart' show getException, uploadPicture;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -42,14 +42,14 @@ class AdviceAdapter implements AdviceRepository {
   @override
   Future<List<Advice>> getAdvice({required Role role, required AdviceStatus status}) async {
     try {
-      final field = role == Role.asesor ? 'advisorRef' : 'studentRef';
+      final field = role == Role.advisor ? 'advisorRef' : 'studentRef';
       final uid = _auth.currentUser?.uid ?? 'no-data';
       final userRef = _firestore.collection('users').doc(uid);
 
       final documents = await _firestore
         .collection(adviceCollection)
         .where(field, isEqualTo: userRef)
-        .where('status', isEqualTo: getStatus(status))
+        .where('status', isEqualTo: status.displayName)
         .get();
 
       return documents.docs.map((doc) => Advice.fromJson(doc.data())).toList();

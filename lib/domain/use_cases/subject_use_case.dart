@@ -7,6 +7,8 @@ class SubjectUseCase {
   SubjectUseCase(this._subjectRepository);
 
   Future<List<Subject>> getSubjects() => _subjectRepository.getSubjects();
-  Future<void> joinSubject({required String subject}) => _subjectRepository.joinSubject(subject: subject);
-  Future<void> leaveSubject({required String subject}) => _subjectRepository.leaveSubject(subject: subject);
+  Future<List<Subject>> getAdvisorSubjects({required List<String> adviceTaught}) 
+    => _subjectRepository.getAdvisorSubjects(adviceTaught: adviceTaught);
+  Future<void> joinSubject({required String id}) => _subjectRepository.joinSubject(id: id);
+  Future<void> leaveSubject({required String id}) => _subjectRepository.leaveSubject(id: id);
 }

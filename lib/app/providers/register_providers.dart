@@ -1,7 +1,6 @@
+import 'package:aspartec_plus/app/global/enums.dart' show Role;
 import 'package:flutter/material.dart' show Icon, Icons, Colors;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show StateProvider;
-
-import '../global/values.dart' show Role;
 
 final selectedRoleProvider = StateProvider.autoDispose<Role?>((ref) => null);
 final stepProvider = StateProvider.autoDispose<int>((ref) => 0);

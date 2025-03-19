@@ -1,4 +1,4 @@
-import 'package:aspartec_plus/app/global/values.dart' show Role, UserStatus;
+import 'package:aspartec_plus/app/global/enums.dart' show Role;
 
 class AspartecUser {
   final Role _role;
@@ -11,7 +11,7 @@ class AspartecUser {
   final String _phoneNumber;
   final String _avatarUrl;
   final List<String> _adviceTaught;
-  final UserStatus _status;
+  final bool _enabled;
 
   Role get role => _role;
   String get controlNumber => _controlNumber;
@@ -23,7 +23,7 @@ class AspartecUser {
   String get phoneNumber => _phoneNumber;
   String get avatarUrl => _avatarUrl;
   List<String> get adviceTaught => _adviceTaught;
-  UserStatus get status => _status;
+  bool get enabled => _enabled;
 
   AspartecUser({
     required Role role,
@@ -36,7 +36,7 @@ class AspartecUser {
     required String phoneNumber,
     required String avatarUrl,
     required List<String> adviceTaught,
-    required UserStatus status
+    required bool enabled
   }) :
   _role = role,
   _controlNumber = controlNumber,
@@ -48,7 +48,7 @@ class AspartecUser {
   _phoneNumber = phoneNumber,
   _avatarUrl = avatarUrl,
   _adviceTaught = adviceTaught,
-  _status = status;
+  _enabled = enabled;
 
   AspartecUser copyWith({
     Role? role,
@@ -61,7 +61,7 @@ class AspartecUser {
     String? phoneNumber,
     String? avatarUrl,
     List<String>? adviceTaught,
-    UserStatus? status
+    bool? enabled
   }) =>
   AspartecUser(
     role: role ?? _role,
@@ -74,14 +74,11 @@ class AspartecUser {
     phoneNumber: phoneNumber ?? _phoneNumber,
     avatarUrl: avatarUrl ?? _avatarUrl,
     adviceTaught: adviceTaught ?? _adviceTaught,
-    status: status ?? _status
+    enabled: enabled ?? _enabled
   );
 
   factory AspartecUser.fromJson(Map<String, dynamic> json) => AspartecUser(
-    role: switch(json['role']) {
-      'asesor' => Role.asesor,
-      _ => Role.estudiante
-    },
+    role: Role.fromDisplayName(json['role']),
     controlNumber: json.containsKey('controlNumber') ? json['controlNumber'] : '',
     major: json.containsKey('major') ? json['major'] : '',
     firstname: json.containsKey('firstname') ? json['firstname'] : '',
@@ -91,16 +88,12 @@ class AspartecUser {
     phoneNumber: json.containsKey('phoneNumber') ? json['phoneNumber'] : '',
     avatarUrl: json.containsKey('avatarUrl') ? json['avatarUrl'] : '',
     adviceTaught: json.containsKey('adviceTaught') ? List<String>.from(json['adviceTaught']) : [],
-    status: json.containsKey('status') ? switch(json['status']) {
-      'active' => UserStatus.active,
-      _ => UserStatus.inactive
-    } 
-    : UserStatus.active
+    enabled: json.containsKey('enabled') ? json['enabled'] : false
   );
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['role'] = _role.name;
+    map['role'] = _role.displayName;
     map['controlNumber'] = _controlNumber;
     map['major'] = _major;
     map['firstname'] = _firstname;
@@ -110,7 +103,7 @@ class AspartecUser {
     map['phoneNumber'] = _phoneNumber.replaceAll(RegExp(r'[^0-9]'), '');
     map['avatarUrl'] = _avatarUrl;
     map['adviceTaught'] = _adviceTaught;
-    map['status'] = _status.name;
+    map['enabled'] = _enabled;
     return map;
   }
 }

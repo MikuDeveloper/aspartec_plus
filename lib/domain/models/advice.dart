@@ -1,4 +1,4 @@
-import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, getStatus, setStatus;
+import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus;
 import 'package:cloud_firestore/cloud_firestore.dart' show DocumentReference, Timestamp;
 
 import 'aspartec_user.dart';
@@ -84,7 +84,7 @@ class Advice {
     id: json.containsKey('id') ? json['id'] : '',
     subject: json.containsKey('subject') ? json['subject'] : '',
     topic: json.containsKey('topic') ? json['topic'] : '',
-    status: json.containsKey('status') ? setStatus(json['status']) : AdviceStatus.canceled,
+    status: json.containsKey('status') ? AdviceStatus.fromDisplayName(json['status']) : AdviceStatus.canceled,
     advisorRef: (json['advisorRef'] as DocumentReference)
       .withConverter<AspartecUser>(
         fromFirestore: (snapshot, _) => AspartecUser.fromJson(snapshot.data() ?? {}),
@@ -107,7 +107,7 @@ class Advice {
     map['id'] = _id;
     map['subject'] = _subject;
     map['topic'] = _topic;
-    map['status'] = getStatus(_status);
+    map['status'] = _status.displayName;
     map['advisorRef'] = _advisorRef;
     map['studentRef'] = _studentRef;
     map['startDate'] = Timestamp.fromDate(_startDate);

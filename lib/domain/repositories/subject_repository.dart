@@ -2,6 +2,7 @@ import '../models/subject.dart';
 
 abstract class SubjectRepository {
   Future<List<Subject>> getSubjects();
-  Future<void> joinSubject({required String subject});
-  Future<void> leaveSubject({required String subject});
+  Future<List<Subject>> getAdvisorSubjects({required List<String> adviceTaught});
+  Future<void> joinSubject({required String id});
+  Future<void> leaveSubject({required String id});
 }

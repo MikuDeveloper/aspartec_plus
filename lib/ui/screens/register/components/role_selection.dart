@@ -1,4 +1,5 @@
-import 'package:aspartec_plus/app/global/values.dart' show Role, defaultPadding;
+import 'package:aspartec_plus/app/global/enums.dart' show Role;
+import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/ui/screens/register/widgets/role_card.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,8 @@ class RoleSelection extends StatelessWidget {
       alignment: WrapAlignment.spaceAround,
       runAlignment: WrapAlignment.center,
       children: [
-        RoleCard(value: Role.estudiante, label: 'Estudiante'),
-        RoleCard(value: Role.asesor, label: 'Asesor')
+        RoleCard(value: Role.student, label: Role.student.displayName),
+        RoleCard(value: Role.advisor, label: Role.advisor.displayName)
       ],
     );
   }

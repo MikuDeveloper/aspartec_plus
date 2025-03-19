@@ -1,6 +1,6 @@
 import 'dart:typed_data' show Uint8List;
 
-import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role;
+import 'package:aspartec_plus/app/global/enums.dart' show Role, AdviceStatus;
 
 import '../models/advice.dart';
 

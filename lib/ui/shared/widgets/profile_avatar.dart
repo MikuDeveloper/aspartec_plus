@@ -1,5 +1,5 @@
 import 'package:aspartec_plus/app/global/assets.dart';
-import 'package:aspartec_plus/app/providers/home_providers.dart';
+import 'package:aspartec_plus/app/providers/home_providers.dart' show currentUserProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:svg_flutter/svg.dart';

@@ -1,5 +1,6 @@
 import 'package:aspartec_plus/app/global/assets.dart';
-import 'package:aspartec_plus/app/global/values.dart' show Role, defaultPadding;
+import 'package:aspartec_plus/app/global/enums.dart' show Role;
+import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show currentUserProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,11 +17,12 @@ class HomeScreen extends ConsumerWidget {
     return ref.watch(currentUserProvider).when(
       skipLoadingOnRefresh: false,
       data: (aspartecUser) => switch(aspartecUser.role) {
-        Role.estudiante => StudentModuleScreen(),
-        Role.asesor => AdvisorModuleScreen(),
+        Role.student => StudentModuleScreen(),
+        Role.advisor => AdvisorModuleScreen(),
       },
       error: (error, stackTrace) => Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: const Text('Error al cargar datos'),
         ),
         body: Center(
@@ -40,7 +42,7 @@ class HomeScreen extends ConsumerWidget {
                   children: [
                     Text(error.toString(), style: Theme.of(context).textTheme.labelLarge),
                     TextButton(
-                      onPressed: () => ref.refresh(currentUserProvider.future),
+                      onPressed: () => ref.refresh(currentUserProvider),
                       child: const Text('Volver a cargar')
                     ),
                   ],

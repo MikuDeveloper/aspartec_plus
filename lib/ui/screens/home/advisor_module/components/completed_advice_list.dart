@@ -1,4 +1,4 @@
-import 'package:aspartec_plus/app/global/values.dart';
+import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus, Role;
 import 'package:aspartec_plus/app/providers/home_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +12,7 @@ class CompletedAdviceList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final completedAdvice = ref.watch(adviceProvider((Role.asesor, AdviceStatus.completed)));
+    final completedAdvice = ref.watch(adviceProvider((Role.advisor, AdviceStatus.completed)));
 
     return completedAdvice.when(
       error: (_, __) => const SliverError(),

@@ -1,5 +1,5 @@
-import 'package:aspartec_plus/app/global/values.dart' show AdviceStatus, Role;
-import 'package:aspartec_plus/app/providers/home_providers.dart';
+import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus, Role;
+import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,7 +12,7 @@ class ForRatingAdviceList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final forRatingAdvice = ref.watch(adviceProvider((Role.asesor, AdviceStatus.forRating)));
+    final forRatingAdvice = ref.watch(adviceProvider((Role.advisor, AdviceStatus.forRating)));
 
     return forRatingAdvice.when(
       error: (_, __) => const SliverError(),

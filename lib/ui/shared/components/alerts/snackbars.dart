@@ -9,7 +9,7 @@ class Snackbars {
         behavior: SnackBarBehavior.floating,
         showCloseIcon: true,
         closeIconColor: Colors.white,
-        backgroundColor: Colors.greenAccent,
+        backgroundColor: Colors.green,
         content: Text(message, style: TextStyle(color: Colors.white))
       )
     );
@@ -22,7 +22,7 @@ class Snackbars {
         behavior: SnackBarBehavior.floating,
         showCloseIcon: true,
         closeIconColor: Colors.white,
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.red,
         content: Text(message, style: TextStyle(color: Colors.white))
       )
     );
