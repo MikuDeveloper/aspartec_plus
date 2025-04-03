@@ -1,5 +1,5 @@
-import 'package:aspartec_plus/app/providers/home_providers.dart';
-import 'package:aspartec_plus/app/providers/use_cases_providers.dart';
+import 'package:aspartec_plus/app/providers/home_providers.dart' show currentUserProvider;
+import 'package:aspartec_plus/app/providers/use_cases_providers.dart' show subjectsUseCaseProvider;
 import 'package:aspartec_plus/domain/models/subject.dart';
 import 'package:aspartec_plus/ui/shared/index.dart' show Dialogs, Snackbars;
 import 'package:flutter/material.dart';
@@ -39,7 +39,11 @@ class SubjectOptions extends ConsumerWidget {
     subjectsUseCase.leaveSubject(id: subject.id)
       .then((_) {
         if (context.mounted) {
-          currentUser.removeSubject(subject.id);
+          currentUser.update((current) {
+            final subjects = current!.adviceTaught;
+            subjects.remove(subject.id);
+            return current.copyWith(adviceTaught: subjects);
+          });
           Snackbars.showSuccessSnackBar(context, 'Materia removida con éxito.');
         }
       })

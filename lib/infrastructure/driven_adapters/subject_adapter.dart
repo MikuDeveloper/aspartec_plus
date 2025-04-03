@@ -1,3 +1,4 @@
+import 'package:aspartec_plus/domain/models/aspartec_user.dart';
 import 'package:aspartec_plus/infrastructure/helpers/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,8 +21,6 @@ class SubjectAdapter implements SubjectRepository {
     }
   }
 
-  converter() => ();
-
   @override
   Future<List<Subject>> getAdvisorSubjects({required List<String> adviceTaught}) async {
     try {
@@ -36,6 +35,21 @@ class SubjectAdapter implements SubjectRepository {
       );
 
       return subjectsDocs.map((doc) => doc.data() ?? Subject.fromJson({})).toList();
+    } on FirebaseException catch (e) {
+      throw getException(e.plugin, e.code);
+    }
+  }
+
+  @override
+  Future<List<AspartecUser>> getAdvisorsBySubject({required String subjectId}) async {
+    try {
+      final advisorsBySubject = await _firestore.collection(usersCollection)
+      .where('enabled', isEqualTo: true)
+      .where('role', isEqualTo: 'Asesor')
+      .where('adviceTaught', arrayContains: subjectId)
+      .get();
+
+      return advisorsBySubject.docs.map((doc) => AspartecUser.fromJson(doc.data())).toList();
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);
     }

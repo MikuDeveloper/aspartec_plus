@@ -1,7 +1,7 @@
 import 'package:aspartec_plus/app/global/assets.dart';
 import 'package:aspartec_plus/app/global/enums.dart' show Role;
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
-import 'package:aspartec_plus/app/providers/home_providers.dart' show currentUserProvider;
+import 'package:aspartec_plus/app/providers/home_providers.dart' show currentUserProvider, userDataProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:svg_flutter/svg.dart';
@@ -14,11 +14,17 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(currentUserProvider).when(
+    return ref.watch(userDataProvider(null)).when(
       skipLoadingOnRefresh: false,
-      data: (aspartecUser) => switch(aspartecUser.role) {
-        Role.student => StudentModuleScreen(),
-        Role.advisor => AdvisorModuleScreen(),
+      data: (aspartecUser) {
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) => ref.read(currentUserProvider.notifier).state = aspartecUser
+        );
+
+        return switch(aspartecUser.role) {
+          Role.student => StudentModuleScreen(),
+          Role.advisor => AdvisorModuleScreen(),
+        };
       },
       error: (error, stackTrace) => Scaffold(
         appBar: AppBar(
@@ -42,7 +48,7 @@ class HomeScreen extends ConsumerWidget {
                   children: [
                     Text(error.toString(), style: Theme.of(context).textTheme.labelLarge),
                     TextButton(
-                      onPressed: () => ref.refresh(currentUserProvider),
+                      onPressed: () => ref.refresh(userDataProvider(null)),
                       child: const Text('Volver a cargar')
                     ),
                   ],

@@ -42,7 +42,7 @@ class AdviceAdapter implements AdviceRepository {
   @override
   Future<List<Advice>> getAdvice({required Role role, required AdviceStatus status}) async {
     try {
-      final field = role == Role.advisor ? 'advisorRef' : 'studentRef';
+      final field = role == Role.advisor ? 'advisorId' : 'studentId';
       final uid = _auth.currentUser?.uid ?? 'no-data';
       final userRef = _firestore.collection('users').doc(uid);
 

@@ -9,15 +9,20 @@ class ProfileAvatar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final avatarUrl = ref.watch(currentUserProvider).value?.avatarUrl ?? '';
+    final avatarUrl = ref.watch(currentUserProvider)!.avatarUrl;
 
-    return CircleAvatar(
-      backgroundImage: avatarUrl.isEmpty
-      ? null
-      : NetworkImage(avatarUrl),
-      child: avatarUrl.isEmpty
-      ? SvgPicture.asset(Assets.profileDefaultPicture)
-      : null,
+    return Hero(
+      tag: 'profile',
+      child: FittedBox(
+        child: CircleAvatar(
+          backgroundImage: avatarUrl.isEmpty
+          ? null
+          : NetworkImage(avatarUrl),
+          child: avatarUrl.isEmpty
+          ? SvgPicture.asset(Assets.profileDefaultPicture)
+          : null,
+        ),
+      ),
     );
   }
 }

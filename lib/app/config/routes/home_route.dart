@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'register_subject_route.dart';
+import 'request_advice_route.dart';
 
 final homeRoute = GoRoute(
   path: '/home',
@@ -23,6 +24,7 @@ final homeRoute = GoRoute(
     reverseTransitionDuration: const Duration(milliseconds: 400)
   ),
   routes: [
-    registerSubjectRoute
+    registerSubjectRoute,
+    requestAdviceRoute
   ]
 );

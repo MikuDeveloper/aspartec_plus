@@ -1,8 +1,9 @@
 import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus, Role;
 import 'package:aspartec_plus/domain/models/advice.dart';
+import 'package:aspartec_plus/domain/models/aspartec_user.dart';
+import 'package:aspartec_plus/domain/models/subject.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/models/aspartec_user.dart';
 import 'use_cases_providers.dart';
 
 final advisorNavigationIndexProvider = StateProvider.autoDispose((ref) => 0);
@@ -17,41 +18,48 @@ final adviceProvider = FutureProvider.family<List<Advice>, (Role, AdviceStatus)>
     .getAdvice(role: record.$1, status: record.$2)
 );
 
-final advisorSubjectsProvider = FutureProvider(
+final userDataProvider = FutureProvider.family<AspartecUser, String?>((ref, id) => ref.read(userUseCaseProvider).getData(id: id));
+
+final advisorSubjectsProvider = FutureProvider<List<Subject>>(
   (ref) => ref.read(subjectsUseCaseProvider).getAdvisorSubjects(
-    adviceTaught: ref.watch(currentUserProvider).value?.adviceTaught ?? []
+    adviceTaught: ref.watch(currentUserProvider)!.adviceTaught
   )
 );
-final availableSubjectsProvider = FutureProvider((ref) => ref.read(subjectsUseCaseProvider).getSubjects());
 
-final currentUserProvider = StateNotifierProvider<UserDataNotifier, AsyncValue<AspartecUser>>(
-  (ref) => UserDataNotifier(ref)
-);
+final availableSubjectsProvider = FutureProvider<List<Subject>>((ref) => ref.read(subjectsUseCaseProvider).getSubjects());
 
-class UserDataNotifier extends StateNotifier<AsyncValue<AspartecUser>> {
-  UserDataNotifier(this.ref) : super(const AsyncValue.loading()) {
-    _loadUserData();
-  }
+final advisorsBySubjectProvider = FutureProvider.family<List<AspartecUser>, String>((ref, subjectId) => ref.read(subjectsUseCaseProvider).getAdvisorsBySubjecy(subjectId: subjectId));
 
-  final Ref ref;
+final currentUserProvider = StateProvider<AspartecUser?>((ref) => null);
 
-  Future<void> _loadUserData() async {
-    state = const AsyncValue.loading();
-    try {
-      final userData = await ref.read(userUseCaseProvider).getData();
-      state = AsyncValue.data(userData);
-    } catch (e, stackTrace) {
-      state = AsyncValue.error(e, stackTrace);
-    }
-  }
+// final currentUserProvider = StateNotifierProvider<CurrentUserNotifier, AsyncValue<AspartecUser>>(
+//   (ref) => CurrentUserNotifier(ref)
+// );
 
-  void updateSubjects(String id) {
-    state.value!.adviceTaught.add(id);
-    state = AsyncValue.data(state.value!.copyWith(adviceTaught: state.value!.adviceTaught));
-  }
+// class CurrentUserNotifier extends StateNotifier<AsyncValue<AspartecUser>> {
+//   CurrentUserNotifier(this.ref) : super(const AsyncValue.loading()) {
+//     _loadUserData();
+//   }
 
-  void removeSubject(String id) {
-    state.value!.adviceTaught.remove(id);
-    state = AsyncValue.data(state.value!.copyWith(adviceTaught: state.value!.adviceTaught));
-  }
-}
+//   final Ref ref;
+
+//   Future<void> _loadUserData() async {
+//     state = const AsyncValue.loading();
+//     try {
+//       final userData = await ref.read(userUseCaseProvider).getData();
+//       state = AsyncValue.data(userData);
+//     } catch (e, stackTrace) {
+//       state = AsyncValue.error(e, stackTrace);
+//     }
+//   }
+
+//   void updateSubjects(String id) {
+//     state.value!.adviceTaught.add(id);
+//     state = AsyncValue.data(state.value!.copyWith(adviceTaught: state.value!.adviceTaught));
+//   }
+
+//   void removeSubject(String id) {
+//     state.value!.adviceTaught.remove(id);
+//     state = AsyncValue.data(state.value!.copyWith(adviceTaught: state.value!.adviceTaught));
+//   }
+// }

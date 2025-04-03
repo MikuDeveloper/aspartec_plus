@@ -32,7 +32,11 @@ class RegisterAdviceButton extends ConsumerWidget {
     subjectsUseCase.joinSubject(id: id)
       .then((_) {
         if (context.mounted) {
-          currentUser.updateSubjects(id);
+          currentUser.update((current) {
+            final subjects = current!.adviceTaught;
+            subjects.add(id);
+            return current.copyWith(adviceTaught: subjects);
+          });
           Snackbars.showSuccessSnackBar(context, 'Materia registrada con éxito.');
         }
       })

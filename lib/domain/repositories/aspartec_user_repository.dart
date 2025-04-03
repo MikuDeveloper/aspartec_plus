@@ -15,7 +15,7 @@ abstract class AspartecUserRepository {
   Future<void> resetPassword({required String email});
 
   Future<void> registerData({required AspartecUser aspartecUser});
-  Future<AspartecUser> getData();
+  Future<AspartecUser> getData({String? id});
 
   Future<String> updateProfilePicture({required Uint8List picture});
   Future<void> updatePersonalData({required Map<String, dynamic> personalData});

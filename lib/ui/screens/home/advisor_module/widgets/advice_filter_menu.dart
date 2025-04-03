@@ -14,7 +14,7 @@ class AdviceFilterMenu extends ConsumerWidget {
     final filterNotifier = ref.watch(adviceFilterProvider(role).notifier);
 
     return MenuAnchor(
-      builder: (context, controller, child) => ElevatedButton.icon(
+      builder: (context, controller, child) => TextButton.icon(
         onPressed: controller.isOpen ? controller.close : controller.open,
         icon: const Icon(Icons.filter_list_alt),
         label: setTextFilter(filter)

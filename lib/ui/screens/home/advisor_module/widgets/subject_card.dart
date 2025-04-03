@@ -42,10 +42,10 @@ class SubjectCard extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(
-                top: 0,
-                right: defaultPadding,
-                bottom: defaultPadding,
-                left: defaultPadding
+                top: defaultPadding / 2,
+                right: defaultPadding * 1.5,
+                bottom: defaultPadding * 1.5,
+                left: defaultPadding * 1.5
               ),
               child: AspectRatio(
                 aspectRatio: 1,

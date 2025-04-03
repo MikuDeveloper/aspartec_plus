@@ -26,7 +26,7 @@ class AspartecUserUseCase {
 
   Future<void> registerData({required AspartecUser aspartecUser}) 
     => _aspartecUserRepository.registerData(aspartecUser: aspartecUser);
-  Future<AspartecUser> getData() => _aspartecUserRepository.getData();
+  Future<AspartecUser> getData({String? id}) => _aspartecUserRepository.getData(id: id);
 
   Future<String> updateProfilePicture({required Uint8List picture})
     => _aspartecUserRepository.updateProfilePicture(picture: picture);

@@ -4,7 +4,9 @@ import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceFilterProvider, adviceProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
+import 'package:go_router/go_router.dart';
 
+import '../../components/advice_list.dart';
 import '../components/sliver_appbar_page.dart';
 import '../widgets/advice_filter_menu.dart';
 
@@ -23,18 +25,24 @@ class StudentPage extends ConsumerWidget {
             title: 'Módulo estudiante',
             picture: Assets.studentPageIcon
           ),
-          const SliverPadding(
-            padding: EdgeInsets.all(defaultPadding / 2),
+          SliverPadding(
+            padding: const EdgeInsets.all(defaultPadding / 2),
             sliver: SliverToBoxAdapter(
               child: Row(
                 spacing: defaultPadding,
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  AdviceFilterMenu(role: Role.student)
+                  const AdviceFilterMenu(role: Role.student),
+                  ElevatedButton.icon(
+                    onPressed: () => context.pushNamed('request-advice'),
+                    label: const Text('Solicitar'),
+                    icon: const Icon(Icons.add_rounded),
+                  )
                 ],
               )
             ),
           ),
+          AdviceList(role: Role.student, status: filter)
         ],
       ),
     );

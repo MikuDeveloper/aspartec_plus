@@ -38,9 +38,9 @@ class AspartecUserAdapter implements AspartecUserRepository {
   }
 
   @override
-  Future<AspartecUser> getData() async {
+  Future<AspartecUser> getData({String? id}) async {
     try {
-      final uid = _auth.currentUser?.uid ?? 'no-data';
+      final uid = id ?? _auth.currentUser?.uid ?? 'no-data';
       final userSnapshot = await _firestore.collection(usersCollection).doc(uid).get();
       return userSnapshot.exists 
         ? AspartecUser.fromJson(userSnapshot.data()!) 

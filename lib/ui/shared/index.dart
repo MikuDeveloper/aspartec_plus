@@ -5,6 +5,7 @@ export 'components/forms/credentials_form.dart';
 export 'components/alerts/snackbars.dart';
 export 'components/alerts/dialogs.dart';
 export 'components/animations/entry_animation.dart';
+export 'components/animations/advice_loading_animation.dart';
 
 // Export widgets
 export 'widgets/simple_password_reactive_field.dart';

@@ -1,4 +1,5 @@
 import 'package:aspartec_plus/app/providers/home_providers.dart' show advisorNavigationIndexProvider;
+import 'package:aspartec_plus/ui/screens/home/advisor_module/widgets/profile_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
 
@@ -18,6 +19,13 @@ class AdvisorModuleScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Aspartec+'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.notifications_rounded),
+          ),
+          const ProfileAction()
+        ],
       ),
       body: SafeArea(
         child: [

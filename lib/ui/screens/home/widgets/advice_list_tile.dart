@@ -1,19 +1,13 @@
+import 'package:aspartec_plus/domain/models/advice.dart';
+import 'package:aspartec_plus/domain/models/aspartec_user.dart';
 import 'package:aspartec_plus/ui/shared/index.dart' show ProfileAvatar;
 import 'package:flutter/material.dart';
 
 class AdviceListTile extends StatelessWidget {
-  const AdviceListTile({
-    super.key,
-    required this.username,
-    required this.date,
-    required this.subject,
-    required this.topic
-  });
+  const AdviceListTile({super.key, required this.advice, required this.user});
 
-  final String username;
-  final String date;
-  final String subject;
-  final String topic;
+  final Advice advice;
+  final AspartecUser user;
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +19,13 @@ class AdviceListTile extends StatelessWidget {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(username),
+              child: Tooltip(
+                message: 'User',
+                child: Text('User', overflow: TextOverflow.ellipsis)
+              ),
             ),
           ),
-          Text(date, style: Theme.of(context).textTheme.labelSmall)
+          Text('Fecha', style: Theme.of(context).textTheme.labelSmall)
         ],
       ),
       subtitle: Padding(
@@ -36,8 +33,8 @@ class AdviceListTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(subject, style: Theme.of(context).textTheme.titleMedium,),
-            Text('Tema: $topic', style: Theme.of(context).textTheme.bodySmall)
+            Text('Materia', style: Theme.of(context).textTheme.titleMedium,),
+            Text('Tema', style: Theme.of(context).textTheme.bodySmall)
           ],
         ),
       ),

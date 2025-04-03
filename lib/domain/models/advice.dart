@@ -1,15 +1,13 @@
 import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus;
-import 'package:cloud_firestore/cloud_firestore.dart' show DocumentReference, Timestamp;
-
-import 'aspartec_user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart' show Timestamp;
 
 class Advice {
   final String _id;
   final String _subject;
   final String _topic;
   final AdviceStatus _status;
-  final DocumentReference _advisorRef;
-  final DocumentReference _studentRef;
+  final String _advisorId;
+  final String _studentId;
   final DateTime _startDate;
   final DateTime _endDate;
   final double _advisorRating;
@@ -20,8 +18,8 @@ class Advice {
   String get subject => _subject;
   String get topic => _topic;
   AdviceStatus get status => _status;
-  DocumentReference get advisorRef => _advisorRef;
-  DocumentReference get studentRef => _studentRef;
+  String get advisorId => _advisorId;
+  String get studentId => _studentId;
   DateTime get startDate => _startDate;
   DateTime get endDate => _endDate;
   double get advisorRating => _advisorRating;
@@ -33,8 +31,8 @@ class Advice {
     required String subject,
     required String topic,
     required AdviceStatus status,
-    required DocumentReference advisorRef,
-    required DocumentReference studentRef,
+    required String advisorId,
+    required String studentId,
     required DateTime startDate,
     required DateTime endDate,
     required double advisorRating,
@@ -45,8 +43,8 @@ class Advice {
   _subject = subject,
   _topic = topic,
   _status = status,
-  _advisorRef = advisorRef,
-  _studentRef = studentRef,
+  _advisorId = advisorId,
+  _studentId = studentId,
   _startDate = startDate,
   _endDate = endDate,
   _advisorRating = advisorRating,
@@ -58,8 +56,8 @@ class Advice {
     String? subject,
     String? topic,
     AdviceStatus? status,
-    DocumentReference? advisorRef,
-    DocumentReference? studentRef,
+    String? advisorId,
+    String? studentId,
     DateTime? startDate,
     DateTime? endDate,
     double? advisorRating,
@@ -71,8 +69,8 @@ class Advice {
     subject: subject ?? _subject,
     topic: topic ?? _topic,
     status: status ?? _status,
-    advisorRef: advisorRef ?? _advisorRef,
-    studentRef: studentRef ?? _studentRef,
+    advisorId: advisorId ?? _advisorId,
+    studentId: studentId ?? _studentId,
     startDate: startDate ?? _startDate,
     endDate: endDate ?? _endDate,
     advisorRating: advisorRating ?? _advisorRating,
@@ -85,16 +83,8 @@ class Advice {
     subject: json.containsKey('subject') ? json['subject'] : '',
     topic: json.containsKey('topic') ? json['topic'] : '',
     status: json.containsKey('status') ? AdviceStatus.fromDisplayName(json['status']) : AdviceStatus.canceled,
-    advisorRef: (json['advisorRef'] as DocumentReference)
-      .withConverter<AspartecUser>(
-        fromFirestore: (snapshot, _) => AspartecUser.fromJson(snapshot.data() ?? {}),
-        toFirestore: (model, _) => model.toJson()
-      ),
-    studentRef: (json['studentRef'] as DocumentReference)
-      .withConverter<AspartecUser>(
-        fromFirestore: (snapshot, _) => AspartecUser.fromJson(snapshot.data() ?? {}),
-        toFirestore: (model, _) => model.toJson()
-      ),
+    advisorId: json.containsKey('advisorId') ? json['advisorId'] : '',
+    studentId: json.containsKey('studentId') ? json['studentId'] : '',
     startDate: json.containsKey('startDate') ? (json['startDate'] as Timestamp).toDate() : DateTime.now(),
     endDate: json.containsKey('endDate') ? (json['endDate'] as Timestamp).toDate() : DateTime.now(),
     advisorRating: json.containsKey('advisorRating') ? json['advisorRating'] : 0.0,
@@ -108,8 +98,8 @@ class Advice {
     map['subject'] = _subject;
     map['topic'] = _topic;
     map['status'] = _status.displayName;
-    map['advisorRef'] = _advisorRef;
-    map['studentRef'] = _studentRef;
+    map['advisorId'] = _advisorId;
+    map['studentId'] = _studentId;
     map['startDate'] = Timestamp.fromDate(_startDate);
     map['endDate'] = Timestamp.fromDate(_startDate);
     map['advisorRating'] = _advisorRating;
