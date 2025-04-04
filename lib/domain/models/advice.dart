@@ -1,5 +1,4 @@
 import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus;
-import 'package:cloud_firestore/cloud_firestore.dart' show Timestamp;
 
 class Advice {
   final String _id;
@@ -8,8 +7,8 @@ class Advice {
   final AdviceStatus _status;
   final String _advisorId;
   final String _studentId;
-  final DateTime _startDate;
-  final DateTime _endDate;
+  final String _startDate;
+  final String _endDate;
   final double _advisorRating;
   final double _studentRating;
   final String _evidenceUrl;
@@ -20,8 +19,8 @@ class Advice {
   AdviceStatus get status => _status;
   String get advisorId => _advisorId;
   String get studentId => _studentId;
-  DateTime get startDate => _startDate;
-  DateTime get endDate => _endDate;
+  String get startDate => _startDate;
+  String get endDate => _endDate;
   double get advisorRating => _advisorRating;
   double get studentRating => _studentRating;
   String get evidenceUrl => _evidenceUrl;
@@ -33,8 +32,8 @@ class Advice {
     required AdviceStatus status,
     required String advisorId,
     required String studentId,
-    required DateTime startDate,
-    required DateTime endDate,
+    required String startDate,
+    required String endDate,
     required double advisorRating,
     required double studentRating,
     required String evidenceUrl
@@ -58,8 +57,8 @@ class Advice {
     AdviceStatus? status,
     String? advisorId,
     String? studentId,
-    DateTime? startDate,
-    DateTime? endDate,
+    String? startDate,
+    String? endDate,
     double? advisorRating,
     double? studentRating,
     String? evidenceUrl
@@ -79,17 +78,17 @@ class Advice {
   );
 
   factory Advice.fromJson(Map<String, dynamic> json) => Advice(
-    id: json.containsKey('id') ? json['id'] : '',
-    subject: json.containsKey('subject') ? json['subject'] : '',
-    topic: json.containsKey('topic') ? json['topic'] : '',
-    status: json.containsKey('status') ? AdviceStatus.fromDisplayName(json['status']) : AdviceStatus.canceled,
-    advisorId: json.containsKey('advisorId') ? json['advisorId'] : '',
-    studentId: json.containsKey('studentId') ? json['studentId'] : '',
-    startDate: json.containsKey('startDate') ? (json['startDate'] as Timestamp).toDate() : DateTime.now(),
-    endDate: json.containsKey('endDate') ? (json['endDate'] as Timestamp).toDate() : DateTime.now(),
-    advisorRating: json.containsKey('advisorRating') ? json['advisorRating'] : 0.0,
-    studentRating: json.containsKey('studentRating') ? json['studentRating'] : 0.0,
-    evidenceUrl: json.containsKey('evidenceUrl') ? json['evidenceUrl'] : ''
+    id: json['id'] ?? '',
+    subject: json['subject'] ?? '',
+    topic: json['topic'] ?? '',
+    status: AdviceStatus.fromDisplayName(json['status'] ?? 'none'),
+    advisorId: json['advisorId'] ?? '',
+    studentId: json['studentId'] ?? '',
+    startDate: json['startDate'] ?? DateTime.now().toIso8601String(),
+    endDate: json['endDate'] ?? DateTime.now().toIso8601String(),
+    advisorRating: json['advisorRating'] ?? 0.0,
+    studentRating: json['studentRating'] ?? 0.0,
+    evidenceUrl: json['evidenceUrl'] ?? ''
   );
 
   Map<String, dynamic> toJson() {
@@ -100,8 +99,8 @@ class Advice {
     map['status'] = _status.displayName;
     map['advisorId'] = _advisorId;
     map['studentId'] = _studentId;
-    map['startDate'] = Timestamp.fromDate(_startDate);
-    map['endDate'] = Timestamp.fromDate(_startDate);
+    map['startDate'] = _startDate;
+    map['endDate'] = _startDate;
     map['advisorRating'] = _advisorRating;
     map['studentRating'] = _studentRating;
     map['evidenceUrl'] = _evidenceUrl;

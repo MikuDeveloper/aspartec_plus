@@ -28,9 +28,9 @@ class Subject {
   );
 
   factory Subject.fromJson(Map<String, dynamic> json) => Subject(
-    id: json.containsKey('id') ? json['id'] : '',
-    name: json.containsKey('name') ? json['name'] : '',
-    pictureUrl: json.containsKey('pictureUrl') ? json['pictureUrl'] : ''
+    id: json['id'] ?? '',
+    name: json['name'] ?? '',
+    pictureUrl: json['pictureUrl'] ?? ''
   );
 
   Map<String, dynamic> toJson() {

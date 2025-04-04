@@ -4,6 +4,8 @@ class Assets {
   static const String itschLogo = 'assets/logos/itsch_logo.svg';
   static const String aspartecLightLogo = 'assets/logos/aspartec_light_logo.png';
   static const String aspartecDarkLogo = 'assets/logos/aspartec_dark_logo.png';
+  static const String aspartecLightLogoSvg = 'assets/logos/aspartec_light_logo.svg';
+  static const String aspartecDarkLogoSvg = 'assets/logos/aspartec_dark_logo.svg';
 
   static const String advisorPageIcon = 'assets/icons/advisor_page_icon.svg';
   static const String reportsPageIcon = 'assets/icons/reports_page_icon.svg';
@@ -17,4 +19,5 @@ class Assets {
   static const String profileDefaultPicture = 'assets/pictures/profile_default_picture.svg';
   static const String noDataPicture = 'assets/pictures/no_data_picture.svg';
   static const String forgotPasswordPicture = 'assets/pictures/forgot_password_picture.svg';
+  static const String waitingPicture = 'assets/pictures/waiting_picture.svg';
 }

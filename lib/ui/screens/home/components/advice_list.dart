@@ -1,12 +1,13 @@
 import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus, Role;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceProvider, userDataProvider;
-import 'package:aspartec_plus/ui/shared/index.dart' show AdviceLoadingAnimation, EntryAnimation;
+import 'package:aspartec_plus/ui/shared/index.dart' show EntryAnimation, LoadingOpacityAnimation;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../widgets/advice_list_tile.dart';
 import '../widgets/sliver_error.dart';
 import '../widgets/sliver_loading.dart';
+import 'advice_list_tile_template.dart';
 
 class AdviceList extends ConsumerWidget {
   const AdviceList({super.key, required this.role, required this.status});
@@ -30,7 +31,7 @@ class AdviceList extends ConsumerWidget {
           
           return userData.when(
             skipLoadingOnRefresh: false,
-            loading: () => const AdviceLoadingAnimation(),
+            loading: () => const LoadingOpacityAnimation(child: AdviceListTileTemplate()),
             error: (_, _) => ListTile(
               onTap: () => ref.refresh(userDataProvider(advice[index].studentId)),
               title: const Center(

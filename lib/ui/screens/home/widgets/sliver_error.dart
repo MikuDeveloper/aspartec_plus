@@ -6,7 +6,10 @@ class SliverError extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverFillRemaining(
-      child: Text('Error al obtener la información solicitada.'),
+      hasScrollBody: false,
+      child: Center(
+        child: Text('Error al obtener la información solicitada.')
+      ),
     );
   }
 }

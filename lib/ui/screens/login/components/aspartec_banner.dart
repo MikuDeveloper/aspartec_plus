@@ -1,5 +1,7 @@
 import 'package:aspartec_plus/app/global/assets.dart';
+import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:flutter/material.dart';
+import 'package:svg_flutter/svg.dart';
 
 class AspartecBanner extends StatelessWidget {
   const AspartecBanner({super.key});
@@ -11,6 +13,7 @@ class AspartecBanner extends StatelessWidget {
 
     return FittedBox(
       child: Column(
+        spacing: defaultPadding,
         mainAxisSize: MainAxisSize.min,
         children: [
           ConstrainedBox(
@@ -19,10 +22,10 @@ class AspartecBanner extends StatelessWidget {
             ),
             child: AspectRatio(
               aspectRatio: 4 / 3,
-              child: Image.asset(
+              child: SvgPicture.asset(
                 brightness == Brightness.light 
-                  ? Assets.aspartecLightLogo
-                  : Assets.aspartecDarkLogo 
+                  ? Assets.aspartecLightLogoSvg
+                  : Assets.aspartecDarkLogoSvg
               ),
             ),
           ),

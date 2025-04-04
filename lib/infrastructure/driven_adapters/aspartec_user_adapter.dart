@@ -83,7 +83,7 @@ class AspartecUserAdapter implements AspartecUserRepository {
       final uid = _auth.currentUser!.uid;
       final userRef = _firestore.collection(usersCollection).doc(uid);
       final batch = _firestore.batch();
-      batch.set(userRef, aspartecUser.toJson());
+      batch.set(userRef, aspartecUser.copyWith(uid: uid).toJson());
       await batch.commit();
     } on FirebaseException catch(e) {
       throw getException(e.plugin, e.code);

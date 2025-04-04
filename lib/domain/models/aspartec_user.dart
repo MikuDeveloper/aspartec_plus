@@ -2,6 +2,7 @@ import 'package:aspartec_plus/app/global/enums.dart' show Role;
 
 class AspartecUser {
   final Role _role;
+  final String _uid;
   final String _controlNumber;
   final String _major;
   final String _firstname;
@@ -14,6 +15,7 @@ class AspartecUser {
   final bool _enabled;
 
   Role get role => _role;
+  String get uid => _uid;
   String get controlNumber => _controlNumber;
   String get major => _major;
   String get firstname => _firstname;
@@ -27,6 +29,7 @@ class AspartecUser {
 
   AspartecUser({
     required Role role,
+    required String uid,
     required String controlNumber,
     required String major,
     required String firstname,
@@ -39,6 +42,7 @@ class AspartecUser {
     required bool enabled
   }) :
   _role = role,
+  _uid = uid,
   _controlNumber = controlNumber,
   _major = major,
   _firstname = firstname,
@@ -52,6 +56,7 @@ class AspartecUser {
 
   AspartecUser copyWith({
     Role? role,
+    String? uid,
     String? controlNumber,
     String? major,
     String? firstname,
@@ -65,6 +70,7 @@ class AspartecUser {
   }) =>
   AspartecUser(
     role: role ?? _role,
+    uid: uid ?? _uid,
     controlNumber: controlNumber ?? _controlNumber,
     major: major ?? _major,
     firstname: firstname ?? _firstname,
@@ -79,21 +85,23 @@ class AspartecUser {
 
   factory AspartecUser.fromJson(Map<String, dynamic> json) => AspartecUser(
     role: Role.fromDisplayName(json['role']),
-    controlNumber: json.containsKey('controlNumber') ? json['controlNumber'] : '',
-    major: json.containsKey('major') ? json['major'] : '',
-    firstname: json.containsKey('firstname') ? json['firstname'] : '',
-    lastname1: json.containsKey('lastname1') ? json['lastname1'] : '',
-    lastname2: json.containsKey('lastname2') ? json['lastname2'] : '',
-    gender: json.containsKey('gender') ? json['gender'] : '',
-    phoneNumber: json.containsKey('phoneNumber') ? json['phoneNumber'] : '',
-    avatarUrl: json.containsKey('avatarUrl') ? json['avatarUrl'] : '',
-    adviceTaught: json.containsKey('adviceTaught') ? List<String>.from(json['adviceTaught']) : [],
-    enabled: json.containsKey('enabled') ? json['enabled'] : false
+    uid: json['uid'] ?? '',
+    controlNumber: json['controlNumber'] ?? '',
+    major: json['major'] ?? '',
+    firstname: json['firstname'] ?? '',
+    lastname1: json['lastname1'] ?? '',
+    lastname2: json['lastname2'] ?? '',
+    gender: json['gender'] ?? '',
+    phoneNumber: json['phoneNumber'] ?? '',
+    avatarUrl: json['avatarUrl'] ?? '',
+    adviceTaught: List<String>.from(json['adviceTaught'] ?? []),
+    enabled: json['enabled'] ?? false
   );
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['role'] = _role.displayName;
+    map['uid'] = _uid;
     map['controlNumber'] = _controlNumber;
     map['major'] = _major;
     map['firstname'] = _firstname;

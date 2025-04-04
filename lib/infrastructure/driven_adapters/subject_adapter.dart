@@ -43,13 +43,16 @@ class SubjectAdapter implements SubjectRepository {
   @override
   Future<List<AspartecUser>> getAdvisorsBySubject({required String subjectId}) async {
     try {
+      final uid = _auth.currentUser?.uid ?? 'no-user';
       final advisorsBySubject = await _firestore.collection(usersCollection)
       .where('enabled', isEqualTo: true)
       .where('role', isEqualTo: 'Asesor')
       .where('adviceTaught', arrayContains: subjectId)
       .get();
 
-      return advisorsBySubject.docs.map((doc) => AspartecUser.fromJson(doc.data())).toList();
+      final advisorsList = advisorsBySubject.docs.map((doc) => AspartecUser.fromJson(doc.data())).toList();
+
+      return advisorsList.takeWhile((advisor) => advisor.uid != uid).toList();
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);
     }

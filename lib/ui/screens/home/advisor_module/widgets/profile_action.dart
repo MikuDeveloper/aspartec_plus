@@ -1,13 +1,17 @@
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
-import 'package:aspartec_plus/ui/shared/widgets/profile_avatar.dart';
+import 'package:aspartec_plus/app/providers/home_providers.dart';
+import 'package:aspartec_plus/ui/shared/index.dart' show ProfileAvatar;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileAction extends StatelessWidget {
+class ProfileAction extends ConsumerWidget {
   const ProfileAction({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final avatarUrl = ref.watch(currentUserProvider)?.avatarUrl ?? '';
+
     return Tooltip(
       message: 'Perfil',
       child: InkWell(
@@ -15,7 +19,10 @@ class ProfileAction extends StatelessWidget {
         onTap: () => context.pushNamed('profile'),
         child: Padding(
           padding: const EdgeInsets.all(defaultPadding / 2),
-          child: const ProfileAvatar(),
+          child: Hero(
+            tag: 'profile',
+            child: ProfileAvatar(avatarUrl: avatarUrl)
+          ),
         ),
       ),
     );

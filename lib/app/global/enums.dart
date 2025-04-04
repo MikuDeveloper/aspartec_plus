@@ -31,5 +31,3 @@ enum AdviceStatus {
     );
   }
 }
-
-// enum UserStatus { active, inactive }
