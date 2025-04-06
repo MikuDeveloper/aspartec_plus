@@ -10,6 +10,9 @@ class AdviceUseCase {
 
   AdviceUseCase(this._adviceRepository);
 
+  Future<void> createAdvice({ required String subject, required String topic, required String advisorId }) 
+    => _adviceRepository.createAdvice(subject: subject, topic: topic, advisorId: advisorId);
+
   Future<List<Advice>> getAdvice({required Role role, required AdviceStatus status})
     => _adviceRepository.getAdvice(role: role, status: status);
     

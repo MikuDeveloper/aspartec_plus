@@ -1,5 +1,6 @@
 import 'package:aspartec_plus/app/global/colors.dart' show seedColor;
 import 'package:aspartec_plus/app/providers/use_cases_providers.dart' show userUseCaseProvider;
+import 'package:aspartec_plus/app/providers/home_providers.dart';
 import 'package:aspartec_plus/ui/shared/index.dart' show Dialogs, Snackbars;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -36,6 +37,15 @@ class LoginButton extends ConsumerWidget {
     userUseCase.login(email: email, password: password)
       .then((_) {
         loginForm.reset(removeFocus: true);
+        ref.invalidate(advisorNavigationIndexProvider);
+        ref.invalidate(studentNavigationIndexProvider);
+        ref.invalidate(adviceFilterProvider);
+        ref.invalidate(adviceProvider);
+        ref.invalidate(userDataProvider);
+        ref.invalidate(advisorSubjectsProvider);
+        ref.invalidate(availableSubjectsProvider);
+        ref.invalidate(advisorsBySubjectProvider);
+        ref.invalidate(currentUserProvider);
         if (context.mounted) context.goNamed('home');
       })
       .catchError((error) {

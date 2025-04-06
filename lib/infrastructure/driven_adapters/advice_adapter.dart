@@ -14,6 +14,42 @@ class AdviceAdapter implements AdviceRepository {
   final _firestore = FirebaseFirestore.instance;
 
   @override
+  Future<void> createAdvice({required String subject, required String topic, required String advisorId}) async {
+    try {
+      final studentId = _auth.currentUser?.uid;
+      if (studentId == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+
+      final adviceDupli = await _firestore
+      .collection(adviceCollection)
+      .where('advisorId', isEqualTo: advisorId)
+      .where('subject', isEqualTo: subject)
+      .where('status', isEqualTo: 'Abierta')
+      .get();
+      if (adviceDupli.docs.isNotEmpty) throw FirebaseException(plugin: 'cloud_firestore', code: 'advice-already-exists');
+      
+      final adviceRef = _firestore.collection(adviceCollection).doc();
+      final advice = Advice(
+        id: adviceRef.id,
+        subject: subject,
+        topic: topic,
+        status: AdviceStatus.opened,
+        advisorId: advisorId,
+        studentId: studentId,
+        startDate: FieldValue.serverTimestamp(),
+        endDate: null, 
+        advisorRating: 0.0,
+        studentRating: 0.0,
+        evidencePath: ''
+      );
+      final batch = _firestore.batch();
+      batch.set(adviceRef, advice.toJson());
+      await batch.commit();
+    } on FirebaseException catch (e) {
+      throw getException(e.plugin, e.code);
+    }
+  }
+
+  @override
   Future<void> cancelAdvice({required String id}) async {
     try {
       final batch = _firestore.batch();
@@ -29,10 +65,10 @@ class AdviceAdapter implements AdviceRepository {
   Future<void> closeAdvice({required String id, required bool rating, required Uint8List evidence}) async {
     try {
       final path = evidencesPath + id;
-      final url = await uploadPicture(path, evidence);
+      await uploadPicture(path, evidence);
       final batch = _firestore.batch();
       final docRef = _firestore.collection(adviceCollection).doc(id);
-      batch.update(docRef, { 'status': 'Completada', 'studentRating': rating, 'evidence': url });
+      batch.update(docRef, { 'status': 'Completada', 'studentRating': rating, 'evidencePath': path });
       await batch.commit();
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);
@@ -43,12 +79,12 @@ class AdviceAdapter implements AdviceRepository {
   Future<List<Advice>> getAdvice({required Role role, required AdviceStatus status}) async {
     try {
       final field = role == Role.advisor ? 'advisorId' : 'studentId';
-      final uid = _auth.currentUser?.uid ?? 'no-data';
-      final userRef = _firestore.collection('users').doc(uid);
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
 
       final documents = await _firestore
         .collection(adviceCollection)
-        .where(field, isEqualTo: userRef)
+        .where(field, isEqualTo: uid)
         .where('status', isEqualTo: status.displayName)
         .get();
 

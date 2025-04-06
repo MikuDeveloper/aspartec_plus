@@ -2,6 +2,8 @@ import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/domain/models/advice.dart';
 import 'package:aspartec_plus/domain/models/aspartec_user.dart';
 import 'package:aspartec_plus/ui/shared/index.dart' show ProfileAvatar;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 
 class AdviceListTile extends StatelessWidget {
@@ -12,21 +14,28 @@ class AdviceListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final username = '${user.firstname} ${user.lastname1} ${user.lastname2}'.trim();
+    final date = (advice.startDate as Timestamp).toDate().toLocal();
+    final dateFormat = DateFormat('dd/MMMM/yyyy hh:mm', 'es').format(date);
+
     return ListTile(
       onTap: () {},
       title: Row(
         children: [
-          ProfileAvatar(avatarUrl: user.avatarUrl),
+          ConstrainedBox(
+            constraints: BoxConstraints(maxHeight: 50),
+            child: ProfileAvatar(avatarUrl: user.avatarUrl)
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
               child: Tooltip(
-                message: 'User',
-                child: Text('User', overflow: TextOverflow.ellipsis)
+                message: username,
+                child: Text(username, overflow: TextOverflow.ellipsis)
               ),
             ),
           ),
-          Text('Fecha', style: Theme.of(context).textTheme.labelSmall)
+          Text(dateFormat.toLowerCase(), style: Theme.of(context).textTheme.labelSmall)
         ],
       ),
       subtitle: Padding(
@@ -34,8 +43,8 @@ class AdviceListTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Materia', style: Theme.of(context).textTheme.titleMedium,),
-            Text('Tema', style: Theme.of(context).textTheme.bodySmall)
+            Text(advice.subject, style: Theme.of(context).textTheme.titleMedium,),
+            Text('Tema: ${advice.topic}', style: Theme.of(context).textTheme.bodySmall)
           ],
         ),
       ),

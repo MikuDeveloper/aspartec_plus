@@ -12,7 +12,7 @@ export 'widgets/simple_password_reactive_field.dart';
 export 'widgets/reactive_strong_password_field.dart';
 export 'widgets/reactive_email_field.dart';
 export 'widgets/reactive_phone_field.dart';
-export 'widgets/reactive_name_field.dart';
+export 'widgets/reactive_plaintext_field.dart';
 export 'widgets/reactive_gender_dropdown.dart';
 export 'widgets/drag_handler.dart';
 export 'widgets/profile_avatar.dart';

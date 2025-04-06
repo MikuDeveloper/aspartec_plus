@@ -15,7 +15,9 @@ class AspartecUserAdapter implements AspartecUserRepository {
   @override
   Future<void> changePassword({required String oldPassword, required String newPassword}) async {
     try {
-      final email = _auth.currentUser?.email ?? 'no-data@gmail.com';
+      final email = _auth.currentUser?.email;
+      if (email == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+
       await _auth.signInWithEmailAndPassword(email: email, password: oldPassword);
       await _auth.currentUser!.updatePassword(newPassword);
     } on FirebaseException catch(e) {
@@ -29,7 +31,9 @@ class AspartecUserAdapter implements AspartecUserRepository {
   @override
   Future<void> deleteAccount({required String password}) async {
     try {
-      final email = _auth.currentUser?.email ?? 'no-data@gmail.com';
+      final email = _auth.currentUser?.email;
+      if (email == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       await _auth.currentUser!.delete();
     } on FirebaseException catch(e) {
@@ -40,7 +44,9 @@ class AspartecUserAdapter implements AspartecUserRepository {
   @override
   Future<AspartecUser> getData({String? id}) async {
     try {
-      final uid = id ?? _auth.currentUser?.uid ?? 'no-data';
+      final uid = id ?? _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+      
       final userSnapshot = await _firestore.collection(usersCollection).doc(uid).get();
       return userSnapshot.exists 
         ? AspartecUser.fromJson(userSnapshot.data()!) 
@@ -102,7 +108,9 @@ class AspartecUserAdapter implements AspartecUserRepository {
   @override
   Future<void> updatePersonalData({required Map<String, dynamic> personalData}) async {
     try {
-      final uid = _auth.currentUser!.uid;
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+
       final userRef = _firestore.collection(usersCollection).doc(uid);
       final batch = _firestore.batch();
       batch.update(userRef, personalData);
@@ -115,7 +123,9 @@ class AspartecUserAdapter implements AspartecUserRepository {
   @override
   Future<String> updateProfilePicture({required Uint8List picture}) async {
     try {
-      final uid = _auth.currentUser!.uid;
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+
       final path = avatarsPath + uid;
       return await uploadPicture(path, picture);
     } on FirebaseException catch(e) {
@@ -126,7 +136,9 @@ class AspartecUserAdapter implements AspartecUserRepository {
   @override
   Future<void> updateSchoolData({required Map<String, dynamic> schoolData}) async {
     try {
-      final uid = _auth.currentUser!.uid;
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+      
       final userRef = _firestore.collection(usersCollection).doc(uid);
       final batch = _firestore.batch();
       batch.update(userRef, schoolData);

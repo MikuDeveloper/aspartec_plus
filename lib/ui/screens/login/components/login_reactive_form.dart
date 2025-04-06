@@ -27,8 +27,14 @@ class LoginReactiveForm extends ConsumerWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
           ),
           const Divider(thickness: 2),
-          const ReactiveEmailField(formControlName: 'email', textInputAction: TextInputAction.next),
-          const SimplePasswordReactiveField(formControlName: 'password'),
+          const ReactiveEmailField(
+            formControlName: 'email',
+            textInputAction: TextInputAction.next
+          ),
+          const SimplePasswordReactiveField(
+            formControlName: 'password',
+            textInputAction: TextInputAction.done,
+          ),
           TextButton(
             onPressed: () => context.pushNamed('forgot-password'),
             child: const Text('Olvidé mi contraseña', textAlign: TextAlign.center)

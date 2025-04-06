@@ -22,7 +22,7 @@ class SubjectOptions extends ConsumerWidget {
         MenuItemButton(
           onPressed: () async {
             final result = await Dialogs.showDecisiveDialog(
-              context, 'Dar de baja "${subject.name}"' ,'Ya no recibirá solicitudes de asesorías de estudiante, pero deberá completar las asesorías que tenga pendientes.') ?? false;
+              context, 'Dar de baja "${subject.name}"' ,'Ya no recibirá solicitudes de asesorías de estudiante, pero deberá completar las asesorías que tenga pendientes.');
             if (result && context.mounted) _removeSubject(context, ref);
           },
           leadingIcon: const Icon(Icons.bookmark_remove_rounded),

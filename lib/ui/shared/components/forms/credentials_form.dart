@@ -24,7 +24,8 @@ class CredentialsForm extends ConsumerWidget {
           ),
           ReactiveStrongPasswordField(
             formControlName: 'password',
-            hintText: 'Contraseña'
+            hintText: '*Contraseña',
+            textInputAction: TextInputAction.done,
           )
         ],
       ),

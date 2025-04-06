@@ -15,7 +15,7 @@ class ReactiveEmailField extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       textInputAction: textInputAction,
       decoration: InputDecoration(
-        hintText: 'Correo electrónico',
+        hintText: '*Correo electrónico',
         prefixIcon: const Padding(
           padding: EdgeInsets.symmetric(horizontal: defaultPadding),
           child: Icon(Icons.email_rounded, color: Colors.lightGreen),

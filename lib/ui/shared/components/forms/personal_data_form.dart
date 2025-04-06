@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, Wid
 import 'package:reactive_forms/reactive_forms.dart' show ReactiveForm;
 
 import '../../widgets/reactive_gender_dropdown.dart';
-import '../../widgets/reactive_name_field.dart';
+import '../../widgets/reactive_plaintext_field.dart';
 import '../../widgets/reactive_phone_field.dart';
 
 class PersonalDataForm extends ConsumerWidget {
@@ -20,20 +20,32 @@ class PersonalDataForm extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const ReactiveNameField(
+          const ReactivePlaintextField(
             formControlName: 'firstname',
-            hintText: '*Nombre(s)'
+            hintText: '*Nombre(s)',
+            textCapitalization: TextCapitalization.words,
+            textInputType: TextInputType.name,
+            textInputAction: TextInputAction.next
           ),
-          const ReactiveNameField(
+          const ReactivePlaintextField(
             formControlName: 'lastname1',
-            hintText: '*Primer apellido'
+            hintText: '*Primer apellido',
+            textCapitalization: TextCapitalization.words,
+            textInputType: TextInputType.name,
+            textInputAction: TextInputAction.next
           ),
-          const ReactiveNameField(
+          const ReactivePlaintextField(
             formControlName: 'lastname2',
-            hintText: 'Segundo apellido'
+            hintText: 'Segundo apellido',
+            textCapitalization: TextCapitalization.words,
+            textInputType: TextInputType.name,
+            textInputAction: TextInputAction.next
           ),
           const ReactiveGenderDropdown(),
-          const ReactivePhoneField()
+          const ReactivePhoneField(
+            formControlName: 'phoneNumber',
+            textInputAction: TextInputAction.done,
+          )
         ],
       ),
     );

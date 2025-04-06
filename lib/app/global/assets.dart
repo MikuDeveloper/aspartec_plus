@@ -20,4 +20,5 @@ class Assets {
   static const String noDataPicture = 'assets/pictures/no_data_picture.svg';
   static const String forgotPasswordPicture = 'assets/pictures/forgot_password_picture.svg';
   static const String waitingPicture = 'assets/pictures/waiting_picture.svg';
+  static const String conversationPicture = 'assets/pictures/conversation_picture.svg';
 }

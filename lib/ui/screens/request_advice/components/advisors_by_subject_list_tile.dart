@@ -13,7 +13,7 @@ class AdvisorsBySubjectListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: TitleListTile(subjectName: subject.name),
-      subtitle: SubtitleListTile(subjectId: subject.id),
+      subtitle: SubtitleListTile(subject: subject),
     );
   }
 }

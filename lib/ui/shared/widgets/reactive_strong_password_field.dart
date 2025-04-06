@@ -1,6 +1,6 @@
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart' show ReactiveTextField, ValidationMessage;
+import 'package:reactive_forms/reactive_forms.dart' show ReactiveTextField;
 
 import 'animated_check.dart';
 
@@ -39,9 +39,6 @@ class _ReactiveStrongPasswordFieldState extends State<ReactiveStrongPasswordFiel
       children: [
         ReactiveTextField(
           formControlName: widget.formControlName,
-          validationMessages: {
-            ValidationMessage.pattern: (error) => 'Formato de contraseña inválido.'
-          },
           textInputAction: widget.textInputAction,
           keyboardType: TextInputType.visiblePassword,
           obscureText: _obscureText,

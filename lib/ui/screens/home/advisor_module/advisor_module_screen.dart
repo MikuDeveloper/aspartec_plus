@@ -1,5 +1,4 @@
 import 'package:aspartec_plus/app/providers/home_providers.dart' show advisorNavigationIndexProvider;
-import 'package:aspartec_plus/ui/screens/home/advisor_module/widgets/profile_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
 
@@ -8,6 +7,7 @@ import 'pages/advisor_page.dart';
 import 'pages/reports_page.dart';
 import 'pages/student_page.dart';
 import 'pages/subjects_page.dart';
+import 'widgets/profile_action.dart';
 
 class AdvisorModuleScreen extends ConsumerWidget {
   const AdvisorModuleScreen({super.key});

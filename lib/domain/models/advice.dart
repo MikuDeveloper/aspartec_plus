@@ -7,11 +7,11 @@ class Advice {
   final AdviceStatus _status;
   final String _advisorId;
   final String _studentId;
-  final String _startDate;
-  final String _endDate;
+  final dynamic _startDate;
+  final dynamic _endDate;
   final double _advisorRating;
   final double _studentRating;
-  final String _evidenceUrl;
+  final String _evidencePath;
 
   String get id => _id;
   String get subject => _subject;
@@ -19,11 +19,11 @@ class Advice {
   AdviceStatus get status => _status;
   String get advisorId => _advisorId;
   String get studentId => _studentId;
-  String get startDate => _startDate;
-  String get endDate => _endDate;
+  dynamic get startDate => _startDate;
+  dynamic get endDate => _endDate;
   double get advisorRating => _advisorRating;
   double get studentRating => _studentRating;
-  String get evidenceUrl => _evidenceUrl;
+  String get evidencePath => _evidencePath;
 
   Advice({
     required String id,
@@ -32,11 +32,11 @@ class Advice {
     required AdviceStatus status,
     required String advisorId,
     required String studentId,
-    required String startDate,
-    required String endDate,
+    required dynamic startDate,
+    required dynamic endDate,
     required double advisorRating,
     required double studentRating,
-    required String evidenceUrl
+    required String evidencePath
   }) :
   _id = id,
   _subject = subject,
@@ -48,7 +48,7 @@ class Advice {
   _endDate = endDate,
   _advisorRating = advisorRating,
   _studentRating = studentRating,
-  _evidenceUrl = evidenceUrl;
+  _evidencePath = evidencePath;
 
   Advice copyWith({
     String? id,
@@ -57,11 +57,11 @@ class Advice {
     AdviceStatus? status,
     String? advisorId,
     String? studentId,
-    String? startDate,
-    String? endDate,
+    dynamic startDate,
+    dynamic endDate,
     double? advisorRating,
     double? studentRating,
-    String? evidenceUrl
+    String? evidencePath
   }) =>
   Advice(
     id: id ?? _id,
@@ -74,7 +74,7 @@ class Advice {
     endDate: endDate ?? _endDate,
     advisorRating: advisorRating ?? _advisorRating,
     studentRating: studentRating ?? _studentRating,
-    evidenceUrl: evidenceUrl ?? _evidenceUrl
+    evidencePath: evidencePath ?? _evidencePath
   );
 
   factory Advice.fromJson(Map<String, dynamic> json) => Advice(
@@ -84,11 +84,11 @@ class Advice {
     status: AdviceStatus.fromDisplayName(json['status'] ?? 'none'),
     advisorId: json['advisorId'] ?? '',
     studentId: json['studentId'] ?? '',
-    startDate: json['startDate'] ?? DateTime.now().toIso8601String(),
-    endDate: json['endDate'] ?? DateTime.now().toIso8601String(),
+    startDate: json['startDate'],
+    endDate: json['endDate'],
     advisorRating: json['advisorRating'] ?? 0.0,
     studentRating: json['studentRating'] ?? 0.0,
-    evidenceUrl: json['evidenceUrl'] ?? ''
+    evidencePath: json['evidencePath'] ?? ''
   );
 
   Map<String, dynamic> toJson() {
@@ -100,10 +100,10 @@ class Advice {
     map['advisorId'] = _advisorId;
     map['studentId'] = _studentId;
     map['startDate'] = _startDate;
-    map['endDate'] = _startDate;
+    map['endDate'] = _endDate;
     map['advisorRating'] = _advisorRating;
     map['studentRating'] = _studentRating;
-    map['evidenceUrl'] = _evidenceUrl;
+    map['evidencePath'] = _evidencePath;
     return map;
   }
 }

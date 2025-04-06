@@ -1,3 +1,4 @@
+import 'package:aspartec_plus/app/global/values.dart' show formattedPhoneNumberRegex, passwordRegex;
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart' show ReactiveFormConfig, ValidationMessage;
 
@@ -12,8 +13,20 @@ class AspartecApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
       validationMessages: {
-        ValidationMessage.required: (error) => 'Este campo es requerido.',
-        ValidationMessage.email: (error) => 'Formato de correo inválido.'
+        ValidationMessage.required: (error) => 'Este campo es requerido',
+        ValidationMessage.email: (error) => 'Formato de correo inválido',
+        ValidationMessage.pattern: (error) {
+          final pattern = (error as Map)['requiredPattern'];
+          if (pattern == formattedPhoneNumberRegex.pattern) {
+            return 'Formato de teléfono inválido';
+          }
+
+          if (pattern == passwordRegex.pattern) {
+            return 'Formato de contraseña inválido';
+          }
+
+          return 'pattern';
+        },
       },
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

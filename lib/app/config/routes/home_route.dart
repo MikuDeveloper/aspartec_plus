@@ -2,6 +2,7 @@ import 'package:aspartec_plus/ui/screens/index.dart' show HomeScreen;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'profile_route.dart';
 import 'register_subject_route.dart';
 import 'request_advice_route.dart';
 
@@ -25,6 +26,7 @@ final homeRoute = GoRoute(
   ),
   routes: [
     registerSubjectRoute,
-    requestAdviceRoute
+    requestAdviceRoute,
+    profileRoute
   ]
 );

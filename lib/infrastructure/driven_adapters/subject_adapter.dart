@@ -43,7 +43,9 @@ class SubjectAdapter implements SubjectRepository {
   @override
   Future<List<AspartecUser>> getAdvisorsBySubject({required String subjectId}) async {
     try {
-      final uid = _auth.currentUser?.uid ?? 'no-user';
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+
       final advisorsBySubject = await _firestore.collection(usersCollection)
       .where('enabled', isEqualTo: true)
       .where('role', isEqualTo: 'Asesor')
@@ -61,7 +63,9 @@ class SubjectAdapter implements SubjectRepository {
   @override
   Future<void> joinSubject({required String id}) async {
     try {
-      final uid = _auth.currentUser?.uid ?? 'no-data';
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+
       final userRef = _firestore.collection(usersCollection).doc(uid);
       final batch = _firestore.batch();
       batch.update(userRef, { 'adviceTaught': FieldValue.arrayUnion([id]) });
@@ -74,7 +78,9 @@ class SubjectAdapter implements SubjectRepository {
   @override
   Future<void> leaveSubject({required String id}) async {
     try {
-      final uid = _auth.currentUser?.uid ?? 'no-data';
+      final uid = _auth.currentUser?.uid;
+      if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
+      
       final userRef = _firestore.collection(usersCollection).doc(uid);
   
       final batch = _firestore.batch();

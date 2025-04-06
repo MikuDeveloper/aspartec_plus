@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart' show ReactiveTextField;
 
 class SimplePasswordReactiveField extends StatefulWidget {
-  const SimplePasswordReactiveField({super.key, required this.formControlName});
+  const SimplePasswordReactiveField({super.key, required this.formControlName, required this.textInputAction});
 
   final String formControlName;
+  final TextInputAction? textInputAction;
 
   @override
   State<SimplePasswordReactiveField> createState() => _SimplePasswordReactiveFieldState();
@@ -18,9 +19,10 @@ class _SimplePasswordReactiveFieldState extends State<SimplePasswordReactiveFiel
   Widget build(BuildContext context) {
     return ReactiveTextField(
       formControlName: widget.formControlName,
+      textInputAction: widget.textInputAction,
       obscureText: _obscureText,
       decoration: InputDecoration(
-        hintText: 'Contraseña',
+        hintText: '*Contraseña',
         prefixIcon: const Padding(
           padding: EdgeInsets.symmetric(horizontal: defaultPadding),
           child: Icon(Icons.lock_rounded, color: Colors.blueAccent),

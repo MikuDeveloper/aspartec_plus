@@ -26,14 +26,14 @@ class AdviceList extends ConsumerWidget {
         separatorBuilder: (context, index) => const Divider(),
         itemCount: advice.length,
         itemBuilder: (context, index) {
-          final user = role == Role.advisor ? advice[index].advisorId : advice[index].studentId;
+          final user = (role == Role.advisor) ? advice[index].studentId : advice[index].advisorId;
           final userData = ref.watch(userDataProvider(user));
           
           return userData.when(
             skipLoadingOnRefresh: false,
             loading: () => const LoadingOpacityAnimation(child: AdviceListTileTemplate()),
             error: (_, _) => ListTile(
-              onTap: () => ref.refresh(userDataProvider(advice[index].studentId)),
+              onTap: () => ref.refresh(userDataProvider(user)),
               title: const Center(
                 child: Icon(Icons.replay_outlined, size: 28),
               ),

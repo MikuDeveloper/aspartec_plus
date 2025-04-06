@@ -15,9 +15,11 @@ class Dialogs {
       )
     );
 
-  static Future<bool?> showDecisiveDialog(BuildContext context, String title, String decision) => showDialog(
+  static Future<bool> showDecisiveDialog(BuildContext context, String title, String decision, [Icon? icon]) async {
+    final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
+        icon: icon,
         title: Text(title, textAlign: TextAlign.center),
         content: Text(decision),
         actions: [
@@ -30,6 +32,8 @@ class Dialogs {
             child: const Text('Aceptar')
           )
         ],
-      )
+      ),
     );
+    return result ?? false;
+  }
 }

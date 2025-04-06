@@ -5,6 +5,7 @@ class AuthException implements Exception {
 
   @override
   String toString() => switch(code) {
+    'expired-session' => 'Sesión expirada, vuelva a iniciar sesión',
     'network-request-failed' => 'Sin conexión a internet.',
     'invalid-credential' => 'Correo o contraseña incorrectos.',
     'user-not-found' => 'Correo o contraseña incorrectos.',
