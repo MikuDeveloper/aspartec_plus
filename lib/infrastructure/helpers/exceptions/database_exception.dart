@@ -6,6 +6,7 @@ class DatabaseException implements Exception {
   @override
   String toString() => switch(code) {
     'advice-already-exists' => 'Ya hay una asesoría abierta con el mismo asesor y la misma materia.',
+    'pending-advice' => 'Hay asesorías pendientes, cierre o cancele las asesorías para poder eliminar su cuenta.',
     'not-found' => 'No se encuentra la información solicitada.',
     'invalid-argument' => 'Se ha especificado un argumento inválido en la solicitud.',
     'already-exists' => 'Ya existe un documento con el ID proporcionado.',

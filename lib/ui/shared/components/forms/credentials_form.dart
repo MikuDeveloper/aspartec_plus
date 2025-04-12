@@ -16,6 +16,7 @@ class CredentialsForm extends ConsumerWidget {
       formGroup: ref.watch(credentialsFormProvider),
       child: Column(
         spacing: defaultPadding,
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ReactiveEmailField(

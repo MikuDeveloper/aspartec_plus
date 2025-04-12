@@ -20,6 +20,12 @@ final forgotPasswordFormProvider = Provider.autoDispose(
   })
 );
 
+final deleteAccountFormProvider = Provider.autoDispose(
+  (ref) => FormGroup({
+    'currentPassword': FormControl<String>(value: '', validators: [Validators.required])
+  })
+);
+
 final personalDataFormProvider = Provider.autoDispose(
   (ref) => FormGroup({
     'firstname': FormControl<String>(value: '', validators: [Validators.required]),
@@ -44,6 +50,16 @@ final credentialsFormProvider = Provider.autoDispose(
   (ref) => FormGroup({
     'email': FormControl<String>(value: '', validators: [Validators.required, Validators.email]),
     'password': FormControl<String>(value: '', validators: [
+      Validators.required,
+      Validators.pattern(passwordRegex)
+    ])
+  })
+);
+
+final updatePasswordFormProvider = Provider.autoDispose(
+  (ref) => FormGroup({
+    'oldPassword': FormControl<String>(value: '', validators: [Validators.required]),
+    'newPassword': FormControl<String>(value: '', validators: [
       Validators.required,
       Validators.pattern(passwordRegex)
     ])

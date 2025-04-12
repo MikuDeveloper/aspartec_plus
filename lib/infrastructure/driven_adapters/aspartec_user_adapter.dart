@@ -32,9 +32,28 @@ class AspartecUserAdapter implements AspartecUserRepository {
   Future<void> deleteAccount({required String password}) async {
     try {
       final email = _auth.currentUser?.email;
-      if (email == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
-
+      final uid = _auth.currentUser?.uid;
+      if (email == null || uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
       await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+      final batch = _firestore.batch();
+      final userDocRef = _firestore.collection(usersCollection).doc(uid);
+      final advisorAdvice = await _firestore.collection(adviceCollection)
+        .where('advisorId', isEqualTo: uid)
+        .where('status', isEqualTo: 'Abierta')
+        .get();
+      final studentAdvice = await _firestore.collection(adviceCollection)
+        .where('studentId', isEqualTo: uid)
+        .where('status', isEqualTo: 'Abierta')
+        .get();
+      for (final doc in advisorAdvice.docs) {
+        batch.update(doc.reference, { 'status': 'Omitida' });
+      }
+      for (final doc in studentAdvice.docs) {
+        batch.update(doc.reference, { 'status': 'Cancelada' });
+      }
+      batch.update(userDocRef, { 'enabled': false, 'adviceTaught': [] });
+      await batch.commit();
       await _auth.currentUser!.delete();
     } on FirebaseException catch(e) {
       throw getException(e.plugin, e.code);
@@ -127,7 +146,12 @@ class AspartecUserAdapter implements AspartecUserRepository {
       if (uid == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
 
       final path = avatarsPath + uid;
-      return await uploadPicture(path, picture);
+      final url = await uploadPicture(path, picture);
+      final userRef = _firestore.collection(usersCollection).doc(uid);
+      final batch = _firestore.batch();
+      batch.update(userRef, { 'avatarUrl': url });
+      await batch.commit();
+      return url;
     } on FirebaseException catch(e) {
       throw getException(e.plugin, e.code);
     }

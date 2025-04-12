@@ -33,6 +33,7 @@ class LoginReactiveForm extends ConsumerWidget {
           ),
           const SimplePasswordReactiveField(
             formControlName: 'password',
+            hintText: '*Contraseña',
             textInputAction: TextInputAction.done,
           ),
           TextButton(

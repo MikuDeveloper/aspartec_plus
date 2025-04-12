@@ -17,7 +17,7 @@ class AspartecUserUseCase {
   Future<UserCredential> login({required String email, required String password})
     => _aspartecUserRepository.login(email: email, password: password);
   Future<void> logout() => _aspartecUserRepository.logout();
-  Future<void> deleteAccount({required String email, required String password})
+  Future<void> deleteAccount({required String password})
     => _aspartecUserRepository.deleteAccount(password: password);
 
   Future<void> changePassword({required String oldPassword, required String newPassword})

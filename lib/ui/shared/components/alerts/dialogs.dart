@@ -15,6 +15,18 @@ class Dialogs {
       )
     );
 
+  static void showInformativeDialog(BuildContext context, String message) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        icon: const Icon(Icons.info_rounded),
+        content: Text(
+          message,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+      )
+    );
+
   static Future<bool> showDecisiveDialog(BuildContext context, String title, String decision, [Icon? icon]) async {
     final result = await showDialog<bool>(
       context: context,

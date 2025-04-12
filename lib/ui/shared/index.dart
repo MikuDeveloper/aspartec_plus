@@ -6,6 +6,7 @@ export 'components/alerts/snackbars.dart';
 export 'components/alerts/dialogs.dart';
 export 'components/animations/entry_animation.dart';
 export 'components/animations/loading_opacity_animation.dart';
+export 'components/bottom_sheets/bottom_sheets.dart';
 
 // Export widgets
 export 'widgets/simple_password_reactive_field.dart';

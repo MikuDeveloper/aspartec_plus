@@ -21,3 +21,23 @@ final forgotPasswordRoute = GoRoute(
     reverseTransitionDuration: const Duration(milliseconds: 400)
   ),
 );
+
+final forgotPasswordHomeRoute = GoRoute(
+  path: '/forgot-password-home',
+  name: 'forgot-password-home',
+  pageBuilder: (context, state) => CustomTransitionPage(
+    key: state.pageKey,
+    child: const ForgotPasswordScreen(),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) => SlideTransition(
+      position: animation.drive(
+        Tween<Offset>(
+          begin: Offset(0, 1),
+          end: Offset.zero
+        ).chain(CurveTween(curve: Curves.bounceInOut))
+      ),
+      child: child,
+    ),
+    transitionDuration: const Duration(milliseconds: 400),
+    reverseTransitionDuration: const Duration(milliseconds: 400)
+  ),
+);
