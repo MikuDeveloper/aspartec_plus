@@ -6,6 +6,7 @@ class SliverLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverFillRemaining(
+      hasScrollBody: false,
       child: Center(
         child: CircularProgressIndicator()
       ),

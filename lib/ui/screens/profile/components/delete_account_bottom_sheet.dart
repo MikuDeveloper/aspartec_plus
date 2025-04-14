@@ -18,40 +18,42 @@ class DeleteAccountBottomSheet extends ConsumerWidget {
       padding: const EdgeInsets.all(defaultPadding),
       child: ReactiveForm(
         formGroup: form,
-        child: Column(
-          spacing: defaultPadding,
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Eliminación de cuenta',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.bold
+        child: Center(
+          child: Column(
+            spacing: defaultPadding,
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Eliminación de cuenta',
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.bold
+                ),
               ),
-            ),
-            const SimplePasswordReactiveField(
-              formControlName: 'currentPassword',
-              hintText: '*Contraseña actual',
-              textInputAction: TextInputAction.done,
-            ),
-            Text(
-              'Ingrese su contraseña para borrar su cuenta. Todos sus datos serán eliminados.',
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-            FilledButton(
-              onPressed: () {
-                if (form.valid) {
-                  final password = (form.value as Map<String, dynamic>)['currentPassword'];
-                  _deleteAccount(context, ref, password);
-                }
-              },
-              style: FilledButton.styleFrom(
-                backgroundColor: Colors.red,
-                foregroundColor: Colors.white
+              const SimplePasswordReactiveField(
+                formControlName: 'currentPassword',
+                hintText: '*Contraseña actual',
+                textInputAction: TextInputAction.done,
               ),
-              child: const Text('Borrar cuenta')
-            )
-          ],
+              Text(
+                'Ingrese su contraseña para borrar su cuenta. Todos sus datos serán eliminados.',
+                style: Theme.of(context).textTheme.labelSmall,
+              ),
+              FilledButton(
+                onPressed: () {
+                  if (form.valid) {
+                    final password = (form.value as Map<String, dynamic>)['currentPassword'];
+                    _deleteAccount(context, ref, password);
+                  }
+                },
+                style: FilledButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white
+                ),
+                child: const Text('Borrar cuenta')
+              )
+            ],
+          ),
         )
       ),
     );

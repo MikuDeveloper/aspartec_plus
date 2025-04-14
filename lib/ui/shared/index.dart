@@ -18,3 +18,4 @@ export 'widgets/reactive_gender_dropdown.dart';
 export 'widgets/drag_handler.dart';
 export 'widgets/profile_avatar.dart';
 export 'widgets/animated_check.dart';
+export 'widgets/refresh_icon_button.dart';

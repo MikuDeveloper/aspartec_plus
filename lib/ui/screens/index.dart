@@ -5,3 +5,4 @@ export './profile/profile_screen.dart';
 export './register/register_screen.dart';
 export './register_subject/register_subject_screen.dart';
 export './request_advice/request_advice_screen.dart';
+export './close-advice/close_advice_screen.dart';

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aspartec_plus/app/global/colors.dart' show seedColor;
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show currentUserProvider;
@@ -34,10 +36,11 @@ class ProfilePicture extends ConsumerWidget {
             ),
           ),
         ),
-        Positioned(
-          bottom: 3,
-          child: const UpdateAvatarButton(),
-        )
+        if (!Platform.isWindows && !Platform.isMacOS && !Platform.isLinux)
+          Positioned(
+            bottom: 3,
+            child: const UpdateAvatarButton(),
+          )
       ],
     );
   }

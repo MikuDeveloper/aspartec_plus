@@ -16,29 +16,31 @@ class UpdatePasswordBottomSheet extends ConsumerWidget {
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(defaultPadding),
-      child: Column(
-        spacing: defaultPadding,
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Actualización de contraseña',
-            textAlign: TextAlign.center,
-            overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.bold
+      child: Center(
+        child: Column(
+          spacing: defaultPadding,
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Actualización de contraseña',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold
+              )
+            ),
+            const ChangePasswordForm(),
+            FilledButton(
+              onPressed: () {
+                if (form.valid) {
+                  final passwords = form.value as Map<String, dynamic>;
+                  _updatePassword(context, ref, passwords);
+                }
+              },
+              child: const Text('Actualizar contraseña')
             )
-          ),
-          const ChangePasswordForm(),
-          FilledButton(
-            onPressed: () {
-              if (form.valid) {
-                final passwords = form.value as Map<String, dynamic>;
-                _updatePassword(context, ref, passwords);
-              }
-            },
-            child: const Text('Actualizar contraseña')
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

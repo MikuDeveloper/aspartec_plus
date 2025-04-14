@@ -40,7 +40,7 @@ class AdviceList extends ConsumerWidget {
             ),
             data: (user) => EntryAnimation(
               beginOffset: index / 2 == 0 ? const Offset(-1, 0) : const Offset(1, 0),
-              child: AdviceListTile(advice: advice[index], user: user),
+              child: AdviceListTile(advice: advice[index], user: user, role: role),
             )
           );
         }
