@@ -1,4 +1,4 @@
-import 'package:aspartec_plus/app/global/values.dart';
+import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show availableSubjectsProvider;
 import 'package:aspartec_plus/ui/shared/index.dart' show RefreshIconButton;
 import 'package:aspartec_plus/ui/shared/mixins/platform_functions.dart';
