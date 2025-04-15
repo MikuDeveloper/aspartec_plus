@@ -29,7 +29,9 @@ class AdvicePage extends ConsumerWidget with PlatformFunctions {
             title: role == Role.advisor
               ? 'Módulo asesor'
               : 'Módulo estudiante',
-            picture: Assets.advisorPageIcon
+            picture: role == Role.advisor
+              ? Assets.advisorPageIcon
+              : Assets.studentPageIcon
           ),
           SliverPadding(
             padding: const EdgeInsets.all(defaultPadding / 2),
