@@ -62,13 +62,13 @@ class AdviceAdapter implements AdviceRepository {
   }
 
   @override
-  Future<void> closeAdvice({required String id, required bool rating, required Uint8List evidence}) async {
+  Future<void> closeAdvice({required String id, required double rating, required Uint8List evidence}) async {
     try {
       final path = evidencesPath + id;
       await uploadPicture(path, evidence);
       final batch = _firestore.batch();
       final docRef = _firestore.collection(adviceCollection).doc(id);
-      batch.update(docRef, { 'status': 'Completada', 'studentRating': rating, 'evidencePath': path });
+      batch.update(docRef, { 'status': 'Completada', 'studentRating': rating, 'evidencePath': path, 'endDate': FieldValue.serverTimestamp() });
       await batch.commit();
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);

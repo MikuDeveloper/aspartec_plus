@@ -16,7 +16,7 @@ class AdviceUseCase {
   Future<List<Advice>> getAdvice({required Role role, required AdviceStatus status})
     => _adviceRepository.getAdvice(role: role, status: status);
     
-  Future<void> closeAdvice({required String id, required bool rating, required Uint8List evidence })
+  Future<void> closeAdvice({required String id, required double rating, required Uint8List evidence })
     => _adviceRepository.closeAdvice(id: id, rating: rating, evidence: evidence);
   Future<void> skipAdvice({required String id}) => _adviceRepository.skipAdvice(id: id);
 
