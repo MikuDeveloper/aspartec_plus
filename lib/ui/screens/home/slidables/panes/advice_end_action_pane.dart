@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:go_router/go_router.dart';
 
-import '../widgets/cancel_advice_slidable_action.dart';
-import '../widgets/rating_advice_slidable_action.dart';
-import '../widgets/report_user_slidable_action.dart';
+import '../actions/cancel_advice_slidable_action.dart';
+import '../actions/rating_advice_slidable_action.dart';
+import '../actions/report_user_slidable_action.dart';
 
 class AdviceEndActionPane extends StatelessWidget {
   const AdviceEndActionPane({super.key, required this.advice, required this.user, required this.role, required this.controller});

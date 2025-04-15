@@ -11,7 +11,7 @@ class RefreshIconButton extends ConsumerWidget {
     return IconButton(
       onPressed: () => ref.refresh(futureProvider.future),
       tooltip: 'Volver a cargar',
-      icon: const Icon(Icons.replay_rounded)
+      icon: const Icon(Icons.refresh_rounded)
     );
   }
 }

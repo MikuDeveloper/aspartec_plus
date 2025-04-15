@@ -4,8 +4,8 @@ import 'package:aspartec_plus/domain/models/aspartec_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../components/advice_end_action_pane.dart';
-import '../components/advice_start_action_pane.dart';
+import 'panes/advice_end_action_pane.dart';
+import 'panes/advice_start_action_pane.dart';
 
 class AdviceSlidable extends StatefulWidget {
   const AdviceSlidable({
@@ -19,7 +19,7 @@ class AdviceSlidable extends StatefulWidget {
   final Role role;
   final Advice advice;
   final AspartecUser user;
-  final ListTile child;
+  final Widget child;
 
   @override
   State<AdviceSlidable> createState() => _AdviceSlidableState();

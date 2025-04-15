@@ -1,16 +1,16 @@
+import 'package:aspartec_plus/app/global/enums.dart';
 import 'package:aspartec_plus/app/providers/home_providers.dart' show advisorNavigationIndexProvider;
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'components/advisor_bottom_navigation.dart';
-import 'pages/advisor_page.dart';
-import 'pages/reports_page.dart';
-import 'pages/student_page.dart';
-import 'pages/subjects_page.dart';
-import 'widgets/profile_action.dart';
+import '../components/advisor_bottom_navigation.dart';
+import '../pages/advice_page.dart';
+import '../pages/reports_page.dart';
+import '../pages/subjects_page.dart';
+import '../widgets/profile_action.dart';
 
-class AdvisorModuleScreen extends ConsumerWidget {
-  const AdvisorModuleScreen({super.key});
+class AdvisorScreen extends ConsumerWidget {
+  const AdvisorScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,8 +29,8 @@ class AdvisorModuleScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: [
-          const AdvisorPage(),
-          const StudentPage(),
+          const AdvicePage(role: Role.advisor),
+          const AdvicePage(role: Role.student),
           const SubjectsPage(),
           const ReportsPage()
         ][navigationIndex],

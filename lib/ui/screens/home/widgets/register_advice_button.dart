@@ -10,18 +10,13 @@ class RegisterAdviceButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SliverToBoxAdapter(
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: ElevatedButton.icon(
-          onPressed: () async {
-            final id = await context.pushNamed('register-subject');
-            if (id.runtimeType == String && context.mounted) _registerSubject(context, ref, id as String);
-          },
-          icon: const Icon(Icons.add_rounded),
-          label: const Text('Agregar')
-        ),
-      ),
+    return ElevatedButton.icon(
+      onPressed: () async {
+        final id = await context.pushNamed('register-subject');
+        if (id.runtimeType == String && context.mounted) _registerSubject(context, ref, id as String);
+      },
+      icon: const Icon(Icons.add_rounded),
+      label: const Text('Agregar')
     );
   }
 
