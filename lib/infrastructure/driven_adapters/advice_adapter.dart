@@ -23,7 +23,7 @@ class AdviceAdapter implements AdviceRepository {
       .collection(adviceCollection)
       .where('advisorId', isEqualTo: advisorId)
       .where('subject', isEqualTo: subject)
-      .where('status', isEqualTo: 'Abierta')
+      .where('status', isEqualTo: AdviceStatus.opened.displayName)
       .get();
       if (adviceDupli.docs.isNotEmpty) throw FirebaseException(plugin: 'cloud_firestore', code: 'advice-already-exists');
       
@@ -54,7 +54,7 @@ class AdviceAdapter implements AdviceRepository {
     try {
       final batch = _firestore.batch();
       final docRef = _firestore.collection(adviceCollection).doc(id);
-      batch.update(docRef, { 'status': 'Cancelada' });
+      batch.update(docRef, { 'status': AdviceStatus.canceled.displayName });
       await batch.commit();
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);
@@ -68,7 +68,12 @@ class AdviceAdapter implements AdviceRepository {
       await uploadPicture(path, evidence);
       final batch = _firestore.batch();
       final docRef = _firestore.collection(adviceCollection).doc(id);
-      batch.update(docRef, { 'status': 'Completada', 'studentRating': rating, 'evidencePath': path, 'endDate': FieldValue.serverTimestamp() });
+      batch.update(docRef, { 
+        'status': AdviceStatus.forRating.displayName,
+        'studentRating': rating,
+        'evidencePath': path,
+        'endDate': FieldValue.serverTimestamp()
+      });
       await batch.commit();
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);
@@ -97,6 +102,18 @@ class AdviceAdapter implements AdviceRepository {
   @override
   Future<void> skipAdvice({required String id}) async {
     
+  }
+
+  @override
+  Future<void> ratingAdvisor({required String id, required double rating}) async {
+    try {
+      final adviceRef = _firestore.collection(adviceCollection).doc(id);
+      final batch = _firestore.batch();
+      batch.update(adviceRef, { 'advisorRating': rating, 'status': AdviceStatus.completed.displayName });
+      await batch.commit();
+    } on FirebaseException catch (e) {
+      throw getException(e.plugin, e.code);
+    }
   }
   
 }

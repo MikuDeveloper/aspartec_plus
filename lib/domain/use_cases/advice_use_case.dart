@@ -21,4 +21,5 @@ class AdviceUseCase {
   Future<void> skipAdvice({required String id}) => _adviceRepository.skipAdvice(id: id);
 
   Future<void> cancelAdvice({required String id}) => _adviceRepository.cancelAdvice(id: id);
+  Future<void> ratingAdvisor({required String id, required double rating}) => _adviceRepository.ratingAdvisor(id: id, rating: rating);
 }

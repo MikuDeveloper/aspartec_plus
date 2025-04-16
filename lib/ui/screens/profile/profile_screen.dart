@@ -1,5 +1,6 @@
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/ui/shared/index.dart' show BottomSheets;
+import 'package:aspartec_plus/ui/shared/mixins/platform_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,7 +11,7 @@ import 'components/update_password_bottom_sheet.dart';
 import 'widgets/logout_button.dart';
 import 'widgets/profile_picture.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget with PlatformFunctions {
   const ProfileScreen({super.key});
 
   @override
@@ -34,7 +35,7 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () => BottomSheets.openBottomSheet(context, const UpdatePasswordBottomSheet()),
+            onTap: () => BottomSheets.openBottomSheet(context, const UpdatePasswordBottomSheet(), isDesktop()),
             leading: const Icon(Icons.key_rounded, color: Colors.blueAccent),
             title: const Text('Cambiar contraseña'),
             trailing: const Icon(Icons.arrow_forward_ios_rounded),
@@ -47,20 +48,20 @@ class ProfileScreen extends StatelessWidget {
           ),
           const Divider(thickness: 3),
           ListTile(
-            onTap: () => BottomSheets.openBottomSheet(context, const EditPersonalDataBottomSheet()),
+            onTap: () => BottomSheets.openBottomSheet(context, const EditPersonalDataBottomSheet(), isDesktop()),
             leading: const Icon(Icons.person_rounded, color: Colors.amberAccent),
             title: const Text('Datos personales'),
             trailing: const Icon(Icons.arrow_forward_ios_rounded),
           ),
           ListTile(
-            onTap: () => BottomSheets.openBottomSheet(context, const EditSchoolDataBottomSheet()),
+            onTap: () => BottomSheets.openBottomSheet(context, const EditSchoolDataBottomSheet(), isDesktop()),
             leading: const Icon(Icons.school_rounded, color: Colors.teal),
             title: const Text('Datos escolares'),
             trailing: const Icon(Icons.arrow_forward_ios_rounded),
           ),
           const Divider(thickness: 3),
           ListTile(
-            onTap: () => BottomSheets.openBottomSheet(context, const DeleteAccountBottomSheet()),
+            onTap: () => BottomSheets.openBottomSheet(context, const DeleteAccountBottomSheet(), isDesktop()),
             leading: const Icon(Icons.person_off_rounded, color: Colors.redAccent),
             title: const Text('Borrar cuenta'),
             trailing: const Icon(Icons.arrow_forward_ios_rounded),

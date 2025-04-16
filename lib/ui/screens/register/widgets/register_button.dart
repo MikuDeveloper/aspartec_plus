@@ -1,4 +1,5 @@
 import 'package:aspartec_plus/app/providers/form_providers.dart';
+import 'package:aspartec_plus/app/providers/home_providers.dart';
 import 'package:aspartec_plus/app/providers/register_providers.dart' show selectedRoleProvider, stepProvider;
 import 'package:aspartec_plus/app/providers/use_cases_providers.dart' show userUseCaseProvider;
 import 'package:aspartec_plus/domain/models/aspartec_user.dart';
@@ -63,7 +64,18 @@ class RegisterButton extends ConsumerWidget {
     try {
       await userUseCase.registerAccount(email: credentialsForm['email'], password: credentialsForm['password']);
       await userUseCase.registerData(aspartecUser: aspartecUser);
-      if (context.mounted) context.goNamed('home');
+      ref.invalidate(advisorNavigationIndexProvider);
+      ref.invalidate(studentNavigationIndexProvider);
+      ref.invalidate(adviceFilterProvider);
+      ref.invalidate(adviceProvider);
+      ref.invalidate(userDataProvider);
+      ref.invalidate(advisorSubjectsProvider);
+      ref.invalidate(availableSubjectsProvider);
+      ref.invalidate(advisorsBySubjectProvider);
+      ref.invalidate(currentUserProvider);
+      if (context.mounted) {
+        context.goNamed('home');
+      }
     } catch (error) {
       if (context.mounted) Snackbars.showErrorSnackBar(context, error.toString());
     } finally {

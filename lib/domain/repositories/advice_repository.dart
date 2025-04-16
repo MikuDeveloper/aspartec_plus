@@ -12,4 +12,5 @@ abstract class AdviceRepository {
   Future<void> skipAdvice({required String id});
 
   Future<void> cancelAdvice({required String id});
+  Future<void> ratingAdvisor({required String id, required double rating});
 }

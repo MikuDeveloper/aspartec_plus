@@ -1,6 +1,6 @@
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/form_providers.dart' show loginFormProvider;
-import 'package:aspartec_plus/ui/shared/index.dart' show DragHandler, ReactiveEmailField, SimplePasswordReactiveField;
+import 'package:aspartec_plus/ui/shared/index.dart' show ReactiveEmailField, SimplePasswordReactiveField;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart' show ConsumerWidget, WidgetRef;
 import 'package:go_router/go_router.dart';
@@ -18,8 +18,6 @@ class LoginReactiveForm extends ConsumerWidget {
       child: Column(
         spacing: defaultPadding,
         children: [
-          const DragHandler(),
-          const SizedBox.shrink(),
           Text(
             'INICIO DE SESIÓN',
             textAlign: TextAlign.center,
@@ -40,9 +38,9 @@ class LoginReactiveForm extends ConsumerWidget {
             onPressed: () => context.pushNamed('forgot-password'),
             child: const Text('Olvidé mi contraseña', textAlign: TextAlign.center)
           ),
-          const SizedBox.shrink(),
+          ExcludeFocus(child: const SizedBox.shrink()),
           const LoginButton(),
-          const SizedBox.shrink(),
+          ExcludeFocus(child: const SizedBox.shrink()),
         ],
       )
     );

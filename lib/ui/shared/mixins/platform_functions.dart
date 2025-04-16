@@ -9,7 +9,15 @@ mixin PlatformFunctions {
     } else if (!Platform.isAndroid && !Platform.isIOS) {
       return true;
     }
+    return false;
+  }
 
+  bool isWebOrMobile() {
+    if (kIsWeb) {
+      return true;
+    } else if (Platform.isAndroid && Platform.isIOS) {
+      return true;
+    }
     return false;
   }
 }

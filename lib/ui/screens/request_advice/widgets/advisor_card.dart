@@ -37,8 +37,9 @@ class AdvisorCard extends ConsumerWidget {
             )
           );
 
-          if (topic == null) return;
-          if (context.mounted) requestAdvice(context, ref, topic);
+          if (topic != null && topic.isNotEmpty && context.mounted) {
+            requestAdvice(context, ref, topic);
+          }
         },
         borderRadius: BorderRadius.circular(defaultPadding / 2),
         child: Padding(

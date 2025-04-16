@@ -50,13 +50,15 @@ class _ReactiveStrongPasswordFieldState extends State<ReactiveStrongPasswordFiel
               child: const Icon(Icons.key_rounded),
             ),
             prefixIconColor: Colors.lightBlueAccent,
-            suffixIcon: Padding(
-              padding: EdgeInsets.only(right: defaultPadding),
-              child: IconButton(
-                onPressed: () => setState(() => _obscureText = !_obscureText),
-                icon: _obscureText 
-                ? const Icon(Icons.visibility_off_rounded) 
-                : const Icon(Icons.visibility_rounded),
+            suffixIcon: ExcludeFocus(
+              child: Padding(
+                padding: EdgeInsets.only(right: defaultPadding),
+                child: IconButton(
+                  onPressed: () => setState(() => _obscureText = !_obscureText),
+                  icon: _obscureText 
+                  ? const Icon(Icons.visibility_off_rounded) 
+                  : const Icon(Icons.visibility_rounded),
+                ),
               ),
             ),
             hintText: widget.hintText,

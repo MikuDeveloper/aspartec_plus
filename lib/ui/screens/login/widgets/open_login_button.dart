@@ -22,6 +22,7 @@ class GoToLoginButton extends StatelessWidget {
             width: 1.5
           )
         ),
+        showDragHandle: true,
         context: context,
         builder: (context) => const SingleChildScrollView(
           padding: EdgeInsets.all(defaultPadding),

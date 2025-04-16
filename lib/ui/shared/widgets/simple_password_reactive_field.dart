@@ -28,11 +28,13 @@ class _SimplePasswordReactiveFieldState extends State<SimplePasswordReactiveFiel
           padding: EdgeInsets.symmetric(horizontal: defaultPadding),
           child: Icon(Icons.lock_rounded, color: Colors.blueAccent),
         ),
-        suffixIcon: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
-          child: IconButton(
-            onPressed: _changeVisibility,
-            icon: Icon(_obscureText ? Icons.visibility_off_rounded : Icons.visibility_rounded)
+        suffixIcon: ExcludeFocus(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: defaultPadding),
+            child: IconButton(
+              onPressed: _changeVisibility,
+              icon: Icon(_obscureText ? Icons.visibility_off_rounded : Icons.visibility_rounded)
+            ),
           ),
         )
       ),

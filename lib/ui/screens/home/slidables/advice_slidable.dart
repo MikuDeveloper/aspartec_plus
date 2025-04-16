@@ -35,6 +35,12 @@ class _AdviceSlidableState extends State<AdviceSlidable> with SingleTickerProvid
   }
 
   @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Slidable(
       key: UniqueKey(),
@@ -44,8 +50,7 @@ class _AdviceSlidableState extends State<AdviceSlidable> with SingleTickerProvid
         phoneNumber: widget.user.phoneNumber,
         role: widget.role,
       ).build(context) as ActionPane : null,
-      endActionPane: widget.advice.status == AdviceStatus.opened && widget.role == Role.student
-            || widget.advice.status == AdviceStatus.canceled && widget.role == Role.advisor ? AdviceEndActionPane(
+      endActionPane: widget.advice.status != AdviceStatus.completed ? AdviceEndActionPane(
         advice: widget.advice,
         user: widget.user,
         role: widget.role,

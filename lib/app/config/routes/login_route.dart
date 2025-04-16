@@ -1,5 +1,4 @@
 import 'package:aspartec_plus/ui/screens/index.dart' show LoginScreen;
-import 'package:firebase_auth/firebase_auth.dart' show FirebaseAuth;
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,6 +21,5 @@ final loginRoute = GoRoute(
   routes: [
     registerRoute,
     forgotPasswordRoute
-  ],
-  redirect: (context, state) => FirebaseAuth.instance.currentUser != null ? '/home' : null,
+  ]
 );
