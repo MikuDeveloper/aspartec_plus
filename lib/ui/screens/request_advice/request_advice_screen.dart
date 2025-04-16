@@ -1,11 +1,13 @@
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show availableSubjectsProvider, advisorsBySubjectProvider;
+import 'package:aspartec_plus/ui/shared/mixins/platform_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'components/advisors_by_subject_list_tile.dart';
+import 'widgets/subtitle_list_tile.dart';
+import 'widgets/title_list_tile.dart';
 
-class RequestAdviceScreen extends ConsumerWidget {
+class RequestAdviceScreen extends ConsumerWidget with PlatformFunctions {
   const RequestAdviceScreen({super.key});
 
   @override
@@ -15,31 +17,20 @@ class RequestAdviceScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buscar asesor par'),
-        centerTitle: true,
+        actions: [
+          if (isDesktop())
+            IconButton(
+              onPressed: () {
+                ref.invalidate(advisorsBySubjectProvider);
+                return ref.refresh(availableSubjectsProvider.future);
+              },
+              icon: const Icon(Icons.refresh_rounded)
+            ),
+        ],
       ),
-      // body: RefreshIndicator(
-      //   onRefresh: () {
-      //     ref.invalidate(advisorsBySubjectProvider);
-      //     return ref.refresh(availableSubjectsProvider.future);
-      //   },
-      //   child: SafeArea(
-      //     child: CustomScrollView(
-      //       slivers: [
-      //         subjectsProvider.when(
-      //           loading: () => const SliverLoading(),
-      //           error: (_, _) => const SliverError(),
-      //           data: (subjects) => SliverList.builder(
-      //             itemCount: subjects.length,
-      //             itemBuilder: (context, index) => AdvisorsBySubjectListTile(subject: subjects[index]) 
-      //           )
-      //         )
-      //       ],
-      //     ),
-      //   ),
-      // )
       body: SafeArea(
         child: subjectsProvider.when(
-          skipLoadingOnRefresh: false,
+          skipLoadingOnRefresh: !isDesktop(),
           data: (subjects) => RefreshIndicator(
             onRefresh: () {
               ref.invalidate(advisorsBySubjectProvider);
@@ -48,7 +39,10 @@ class RequestAdviceScreen extends ConsumerWidget {
             child: ListView.separated(
               separatorBuilder: (context, index) => const Divider(),
               itemCount: subjects.length,
-              itemBuilder: (context, index) => AdvisorsBySubjectListTile(subject: subjects[index])
+              itemBuilder: (context, index) => ListTile(
+                title: TitleListTile(subject: subjects[index]),
+                subtitle: SubtitleListTile(subject: subjects[index]),
+              )
             ),
           ),
           error: (_, _) => Center(

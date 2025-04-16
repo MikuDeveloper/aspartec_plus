@@ -15,7 +15,6 @@ class AdvisorSubjectsList extends ConsumerWidget with PlatformFunctions {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final subjectsProvider = ref.watch(advisorSubjectsProvider);
-    final size = MediaQuery.of(context).size;
 
     return subjectsProvider.when(
       skipLoadingOnReload: true,
@@ -29,7 +28,7 @@ class AdvisorSubjectsList extends ConsumerWidget with PlatformFunctions {
           child: SubjectCard(subject: subjects[index])
         ),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: size.width > 600 ? 3 : 2,
+          crossAxisCount: getAxisCountForGrid(context),
           mainAxisSpacing: defaultPadding / 2,
           crossAxisSpacing: defaultPadding / 2
         )

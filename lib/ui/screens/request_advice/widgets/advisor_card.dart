@@ -71,11 +71,16 @@ class AdvisorCard extends ConsumerWidget {
     adviceUseCase.createAdvice(subject: subject.name, topic: topic, advisorId: advisor.uid)
       .then((_) {
         ref.invalidate(adviceProvider);
-        if (context.mounted) Snackbars.showSuccessSnackBar(context, 'Asesoría registrada con éxito');
+        if (context.mounted) {
+          Snackbars.showSuccessSnackBar(context, 'Asesoría registrada con éxito');
+          context.goNamed('home');
+        }
       })
       .catchError((error, stackTrace) {
-        if (context.mounted) Snackbars.showErrorSnackBar(context, error.toString());
-      })
-      .whenComplete(() => context.mounted ? context.goNamed('home') : () {});
+        if (context.mounted) {
+          Snackbars.showErrorSnackBar(context, error.toString());
+          context.pop();
+        }
+      });
   }
 }
