@@ -16,7 +16,7 @@ mixin PlatformFunctions {
   bool isWebOrMobile() {
     if (kIsWeb) {
       return true;
-    } else if (Platform.isAndroid && Platform.isIOS) {
+    } else if (Platform.isAndroid || Platform.isIOS) {
       return true;
     }
     return false;
@@ -24,7 +24,7 @@ mixin PlatformFunctions {
 
   int getAxisCountForGrid(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    if (width < 400) return 1;
+    if (width < 300) return 1;
     if (width < 600) return 2;
     if (width < 900) return 3;
     if (width < 1200) return 4;

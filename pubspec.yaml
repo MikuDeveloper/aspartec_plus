@@ -26,6 +26,7 @@ dependencies:
   image_cropper: ^9.1.0
   url_launcher: ^6.3.1
   flutter_rating_bar_plus: ^4.0.2
+  flutter_launcher_icons: ^0.14.3
 
 dev_dependencies:
   flutter_test:

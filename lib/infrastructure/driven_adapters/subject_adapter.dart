@@ -53,8 +53,9 @@ class SubjectAdapter implements SubjectRepository {
       .get();
 
       final advisorsList = advisorsBySubject.docs.map((doc) => AspartecUser.fromJson(doc.data())).toList();
-
-      return advisorsList.takeWhile((advisor) => advisor.uid != uid).toList();
+      advisorsList.removeWhere((advisor) => advisor.uid == uid);
+      
+      return advisorsList;
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);
     }

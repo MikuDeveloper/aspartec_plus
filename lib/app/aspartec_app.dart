@@ -31,6 +31,7 @@ class AspartecApp extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: routerConfig,
+        title: 'Aspartec+',
         theme: lightTheme,
         darkTheme: darkTheme,
         themeMode: ThemeMode.system,
