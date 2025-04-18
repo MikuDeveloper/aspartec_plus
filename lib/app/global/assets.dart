@@ -6,6 +6,8 @@ class Assets {
   static const String aspartecDarkLogo = 'assets/logos/aspartec_dark_logo.png';
   static const String aspartecLightLogoSvg = 'assets/logos/aspartec_light_logo.svg';
   static const String aspartecDarkLogoSvg = 'assets/logos/aspartec_dark_logo.svg';
+  static const String aspartecAppIconLight = 'assets/icons/aspartec_app_icon_light.png';
+  static const String aspartecAppIconDark = 'assets/icons/aspartec_app_icon_dark.png';
 
   static const String advisorPageIcon = 'assets/icons/advisor_page_icon.svg';
   static const String reportsPageIcon = 'assets/icons/reports_page_icon.svg';

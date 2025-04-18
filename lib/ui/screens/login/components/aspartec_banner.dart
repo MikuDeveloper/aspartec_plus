@@ -30,7 +30,13 @@ class AspartecBanner extends StatelessWidget {
             ),
           ),
           Text(
-            'Programa de\n Asesorías Acadédemicas',
+            'ASPARTEC',
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.displayMedium
+              ?.copyWith(fontWeight: FontWeight.w900, letterSpacing: 5),
+          ),
+          Text(
+            'Programa de\nAsesorías Acadédemicas',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge
               ?.copyWith(fontWeight: FontWeight.w700),
