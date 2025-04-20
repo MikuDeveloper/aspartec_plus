@@ -3,6 +3,7 @@ import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show userDataProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:svg_flutter/svg.dart';
 
 class HomeErrorScreen extends ConsumerWidget {
@@ -33,9 +34,13 @@ class HomeErrorScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(error, style: Theme.of(context).textTheme.labelLarge),
-                    TextButton(
+                    FilledButton(
                       onPressed: () => ref.refresh(userDataProvider(null)),
                       child: const Text('Volver a cargar')
+                    ),
+                    TextButton(
+                      onPressed: () => context.goNamed('login'),
+                      child: const Text('Ir a inicio de sesión')
                     ),
                   ],
                 )

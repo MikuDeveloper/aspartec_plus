@@ -23,7 +23,7 @@ class AvailableAdvisorsList extends StatelessWidget {
             width: 175,
             child: AdvisorCard(advisor: advisor, subject: subject),
           )
-        ).toList().sublist(0, advisors.isNotEmpty && advisors.length > 6 ? 6 : advisors.length),
+        ).toList().sublist(0, advisors.isNotEmpty && advisors.length > 5 ? 5 : advisors.length),
       )
     ) 
     : Center(

@@ -39,13 +39,28 @@ class AdviceListTile extends StatelessWidget with AdviceFunctions {
       ),
       subtitle: Padding(
         padding: const EdgeInsets.only(top: defaultPadding / 2),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          spacing: defaultPadding / 2,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(advice.subject, style: Theme.of(context).textTheme.titleMedium,),
-            Text('Tema: ${advice.topic}', style: Theme.of(context).textTheme.bodySmall)
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(advice.subject, style: Theme.of(context).textTheme.titleMedium, overflow: TextOverflow.ellipsis),
+                  Text('Tema: ${advice.topic}', style: Theme.of(context).textTheme.bodySmall, overflow: TextOverflow.ellipsis)
+                ],
+              ),
+            ),
+            advice.endDate == null
+              ? const SizedBox.shrink()
+              : Text(
+                getDateFormatted(advice.endDate),
+                textAlign: TextAlign.end,
+                style: Theme.of(context).textTheme.labelSmall
+              )
           ],
-        ),
+        )
       )
     );
   }

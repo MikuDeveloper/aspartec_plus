@@ -20,22 +20,22 @@ class RegisterAdviceButton extends ConsumerWidget {
     );
   }
 
-  void _registerSubject(BuildContext context, WidgetRef ref, String id) {
+  void _registerSubject(BuildContext context, WidgetRef ref, String id) async {
     Dialogs.showLoadingDialog(context);
     final subjectsUseCase = ref.read(subjectsUseCaseProvider);
     final currentUser = ref.read(currentUserProvider.notifier);
-    subjectsUseCase.joinSubject(id: id)
-      .then((_) {
-        if (context.mounted) {
-          currentUser.update((current) {
-            final subjects = current!.adviceTaught;
-            subjects.add(id);
-            return current.copyWith(adviceTaught: subjects);
-          });
-          Snackbars.showSuccessSnackBar(context, 'Materia registrada con éxito.');
-        }
-      })
-      .catchError((error) { if (context.mounted) Snackbars.showErrorSnackBar(context, error.toString()); })
-      .whenComplete(() => context.mounted ? context.pop() : () {});
+    try {
+      await subjectsUseCase.joinSubject(id: id);
+      currentUser.update((current) {
+        final subjects = current!.adviceTaught;
+        subjects.add(id);
+        return current.copyWith(adviceTaught: subjects);
+      });
+      if (context.mounted) Snackbars.showSuccessSnackBar(context, 'Materia registrada con éxito.');
+    } catch (error) {
+      if (context.mounted) Snackbars.showErrorSnackBar(context, error.toString());
+    } finally {
+      if (context.mounted) context.pop();
+    }
   }
 }

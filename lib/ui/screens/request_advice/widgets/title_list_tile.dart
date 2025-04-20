@@ -25,7 +25,7 @@ class TitleListTile extends ConsumerWidget {
             )
           )
         ),
-        if (advisors.isNotEmpty && advisors.length > 6)
+        if (advisors.isNotEmpty && advisors.length > 5)
           TextButton(
             onPressed: () => context.pushNamed('available-advisors', extra: subject),
             child: const Text('Ver más')

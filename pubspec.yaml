@@ -28,6 +28,7 @@ dependencies:
   flutter_rating_bar_plus: ^4.0.2
   flutter_launcher_icons: ^0.14.3
   flutter_native_splash: ^2.4.6
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:
