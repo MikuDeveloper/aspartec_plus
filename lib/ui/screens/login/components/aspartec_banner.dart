@@ -39,7 +39,7 @@ class AspartecBanner extends StatelessWidget {
             'Programa de\nAsesorías Acadédemicas',
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge
-              ?.copyWith(fontWeight: FontWeight.w700),
+              ?.copyWith(fontWeight: FontWeight.w600),
           )
         ],
       ),

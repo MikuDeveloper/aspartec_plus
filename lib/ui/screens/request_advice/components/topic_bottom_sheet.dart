@@ -2,18 +2,23 @@ import 'package:aspartec_plus/app/global/assets.dart';
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/ui/shared/index.dart' show ReactivePlaintextField;
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
-class TopicBottomSheet extends StatelessWidget {
-  const TopicBottomSheet({super.key});
+final formProvider = Provider.autoDispose((ref) => FormGroup({
+  'topic': FormControl(value: '', validators: [Validators.required])
+}));
+
+class TopicBottomSheet extends ConsumerWidget {
+  const TopicBottomSheet({super.key, required this.subjectName});
+
+  final String subjectName;
 
   @override
-  Widget build(BuildContext context) {
-    final form = FormGroup({
-      'topic': FormControl(value: '', validators: [Validators.required])
-    });
+  Widget build(BuildContext context, WidgetRef ref) {
+    final form = ref.watch(formProvider);
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(defaultPadding),
@@ -30,6 +35,11 @@ class TopicBottomSheet extends StatelessWidget {
                   maxHeight: 400
                 ),
                 child: SvgPicture.asset(Assets.conversationPicture),
+              ),
+              Text(
+                subjectName,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Text(
                 'Ingrese el tema que desea tratar con su asesor.',

@@ -1,5 +1,6 @@
 import 'package:aspartec_plus/app/global/assets.dart';
 import 'package:aspartec_plus/app/global/enums.dart' show Role;
+import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
 import 'package:aspartec_plus/app/providers/home_providers.dart' show advisorNavigationIndexProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,15 +22,14 @@ class AdvisorScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: brightness == Brightness.light
-          ? SvgPicture.asset(Assets.aspartecLightLogoSvg)
-          : SvgPicture.asset(Assets.aspartecDarkLogoSvg),
+        leading: Padding(
+          padding: const EdgeInsets.all(defaultPadding / 2),
+          child: brightness == Brightness.light
+            ? SvgPicture.asset(Assets.aspartecLightLogoSvg)
+            : SvgPicture.asset(Assets.aspartecDarkLogoSvg),
+        ),
         title: const Text('Aspartec+'),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_rounded),
-          ),
           const ProfileAction()
         ],
       ),

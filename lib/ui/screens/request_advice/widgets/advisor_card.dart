@@ -4,13 +4,14 @@ import 'package:aspartec_plus/app/providers/use_cases_providers.dart' show advic
 import 'package:aspartec_plus/domain/models/aspartec_user.dart';
 import 'package:aspartec_plus/domain/models/subject.dart';
 import 'package:aspartec_plus/ui/shared/index.dart' show Dialogs, ProfileAvatar, Snackbars;
+import 'package:aspartec_plus/ui/shared/mixins/advice_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../components/topic_bottom_sheet.dart';
 
-class AdvisorCard extends ConsumerWidget {
+class AdvisorCard extends ConsumerWidget with AdviceFunctions {
   const AdvisorCard({super.key, required this.advisor, required this.subject});
 
   final AspartecUser advisor;
@@ -18,7 +19,7 @@ class AdvisorCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final advisorName = '${advisor.firstname} ${advisor.lastname1} ${advisor.lastname2}'.trim();
+    final advisorName = getUsername(advisor);
     final avatarUrl = advisor.avatarUrl;
 
     return Card(
@@ -33,7 +34,7 @@ class AdvisorCard extends ConsumerWidget {
               padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom
               ),
-              child: const TopicBottomSheet(),
+              child: TopicBottomSheet(subjectName: subject.name),
             )
           );
 

@@ -1,8 +1,7 @@
 import 'package:aspartec_plus/app/global/values.dart';
+import 'package:aspartec_plus/app/providers/home_providers.dart' show majorFilterProvider;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../providers/major_provider.dart';
 
 class MajorFilterMenu extends ConsumerWidget {
   const MajorFilterMenu({super.key});

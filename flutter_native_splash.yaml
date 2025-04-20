@@ -1,7 +1,10 @@
 flutter_native_splash:
+  android_gravity: center
+  web_image_mode: center
+  ios_content_mode: center
+
   color: "#0F2C59"
   image: "assets/splash/aspartec_splash_light.png"
-
   color_dark: "#121418"
   image_dark: "assets/splash/aspartec_splash_dark.png"
 
@@ -14,6 +17,5 @@ flutter_native_splash:
   
   color_web: "#0F2C59"
   image_web: "assets/icons/aspartec_app_icon.png"
-
   color_dark_web: "#121418"
   image_dark_web: "assets/icons/aspartec_app_icon_dark.png"

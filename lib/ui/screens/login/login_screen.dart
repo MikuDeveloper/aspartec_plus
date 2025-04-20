@@ -16,30 +16,27 @@ class LoginScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Stack(
+          alignment: Alignment.center,
           children: [
             for (int i = 0; i < circles.length; i++) circles[i],
-            const Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.all(defaultPadding / 2),
-                child: AspartecBanner(),
-              ),
-            ),
-            const Align(
-              alignment: Alignment.topCenter,
-              child: Padding(
-                padding: EdgeInsets.all(defaultPadding / 2),
-                child: ItschBanner(),
-              ),
-            ),
-            const Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: defaultPadding * 3,
-                  horizontal: defaultPadding / 2
-                ),
-                child: LoginButtons(),
+            Center(
+              child: Column(
+                spacing: defaultPadding,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: defaultPadding
+                    ),
+                    child: ItschBanner(),
+                  ),
+                  Expanded(child: AspartecBanner()),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: defaultPadding * 1.5
+                    ),
+                    child: LoginButtons()
+                  )
+                ],
               ),
             )
           ],

@@ -9,6 +9,7 @@ import 'components/edit_personal_data_bottom_sheet.dart';
 import 'components/edit_school_data_bottom_sheet.dart';
 import 'components/update_password_bottom_sheet.dart';
 import 'widgets/logout_button.dart';
+import 'widgets/notificactions_list_tile.dart';
 import 'widgets/profile_picture.dart';
 
 class ProfileScreen extends StatelessWidget with PlatformFunctions {
@@ -34,6 +35,7 @@ class ProfileScreen extends StatelessWidget with PlatformFunctions {
               child: const ProfilePicture()
             ),
           ),
+          const NotificactionsListTile(),
           ListTile(
             onTap: () => BottomSheets.openBottomSheet(context, const UpdatePasswordBottomSheet(), isDesktop()),
             leading: const Icon(Icons.key_rounded, color: Colors.blueAccent),
@@ -49,7 +51,7 @@ class ProfileScreen extends StatelessWidget with PlatformFunctions {
           const Divider(thickness: 3),
           ListTile(
             onTap: () => BottomSheets.openBottomSheet(context, const EditPersonalDataBottomSheet(), isDesktop()),
-            leading: const Icon(Icons.person_rounded, color: Colors.amberAccent),
+            leading: const Icon(Icons.person_rounded, color: Colors.deepOrange),
             title: const Text('Datos personales'),
             trailing: const Icon(Icons.arrow_forward_ios_rounded),
           ),

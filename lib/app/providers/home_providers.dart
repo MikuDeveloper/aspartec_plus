@@ -1,13 +1,24 @@
+import 'dart:async' show StreamController;
+
 import 'package:aspartec_plus/app/global/enums.dart' show AdviceStatus, Role;
 import 'package:aspartec_plus/domain/models/advice.dart';
 import 'package:aspartec_plus/domain/models/aspartec_user.dart';
 import 'package:aspartec_plus/domain/models/subject.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'use_cases_providers.dart';
 
-final advisorNavigationIndexProvider = StateProvider.autoDispose((ref) => 0);
-final studentNavigationIndexProvider = StateProvider.autoDispose((ref) => 0);
+final advisorNavigationIndexProvider = StateProvider.autoDispose<int>((ref) => 0);
+final studentNavigationIndexProvider = StateProvider.autoDispose<int>((ref) => 0);
+
+final firebaseMessagesProvider = StreamProvider.autoDispose<RemoteMessage?>((ref) {
+  final controller = StreamController<RemoteMessage>();
+  FirebaseMessaging.onMessage.listen((message) {
+    controller.add(message);
+  });
+  return controller.stream;
+});
 
 final adviceFilterProvider = StateProvider.family<AdviceStatus, Role>(
   (ref, role) => AdviceStatus.opened
@@ -38,3 +49,5 @@ final advisorsBySubjectProvider = FutureProvider.family<List<AspartecUser>, Stri
 );
 
 final currentUserProvider = StateProvider<AspartecUser?>((ref) => null);
+
+final majorFilterProvider = StateProvider.autoDispose<String?>((ref) => null);
