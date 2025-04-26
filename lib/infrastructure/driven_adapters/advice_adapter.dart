@@ -14,7 +14,7 @@ class AdviceAdapter implements AdviceRepository {
   final _firestore = FirebaseFirestore.instance;
 
   @override
-  Future<void> createAdvice({required String subject, required String topic, required String advisorId}) async {
+  Future<void> createAdvice({required String subject, required String topic, required String advisorId, required String studentMajor}) async {
     try {
       final studentId = _auth.currentUser?.uid;
       if (studentId == null) throw FirebaseException(plugin: 'firebase_auth', code: 'expired-session');
@@ -35,6 +35,7 @@ class AdviceAdapter implements AdviceRepository {
         status: AdviceStatus.opened,
         advisorId: advisorId,
         studentId: studentId,
+        studentMajor: studentMajor,
         startDate: FieldValue.serverTimestamp(),
         endDate: null, 
         advisorRating: 0.0,
@@ -54,7 +55,13 @@ class AdviceAdapter implements AdviceRepository {
     try {
       final batch = _firestore.batch();
       final docRef = _firestore.collection(adviceCollection).doc(id);
-      batch.update(docRef, { 'status': AdviceStatus.canceled.displayName });
+      batch.update(
+        docRef, 
+        { 
+          'status': AdviceStatus.canceled.displayName,
+          'endDate': FieldValue.serverTimestamp()
+        }
+      );
       await batch.commit();
     } on FirebaseException catch (e) {
       throw getException(e.plugin, e.code);

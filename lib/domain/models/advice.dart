@@ -7,6 +7,7 @@ class Advice {
   final AdviceStatus _status;
   final String _advisorId;
   final String _studentId;
+  final String _studentMajor;
   final dynamic _startDate;
   final dynamic _endDate;
   final double _advisorRating;
@@ -19,6 +20,7 @@ class Advice {
   AdviceStatus get status => _status;
   String get advisorId => _advisorId;
   String get studentId => _studentId;
+  String get studentMajor => _studentMajor;
   dynamic get startDate => _startDate;
   dynamic get endDate => _endDate;
   double get advisorRating => _advisorRating;
@@ -32,6 +34,7 @@ class Advice {
     required AdviceStatus status,
     required String advisorId,
     required String studentId,
+    required String studentMajor,
     required dynamic startDate,
     required dynamic endDate,
     required double advisorRating,
@@ -44,6 +47,7 @@ class Advice {
   _status = status,
   _advisorId = advisorId,
   _studentId = studentId,
+  _studentMajor = studentMajor,
   _startDate = startDate,
   _endDate = endDate,
   _advisorRating = advisorRating,
@@ -57,6 +61,7 @@ class Advice {
     AdviceStatus? status,
     String? advisorId,
     String? studentId,
+    String? studentMajor,
     dynamic startDate,
     dynamic endDate,
     double? advisorRating,
@@ -70,6 +75,7 @@ class Advice {
     status: status ?? _status,
     advisorId: advisorId ?? _advisorId,
     studentId: studentId ?? _studentId,
+    studentMajor: studentMajor ?? _studentMajor,
     startDate: startDate ?? _startDate,
     endDate: endDate ?? _endDate,
     advisorRating: advisorRating ?? _advisorRating,
@@ -84,10 +90,11 @@ class Advice {
     status: AdviceStatus.fromDisplayName(json['status'] ?? 'none'),
     advisorId: json['advisorId'] ?? '',
     studentId: json['studentId'] ?? '',
+    studentMajor: json['studentMajor'] ?? '',
     startDate: json['startDate'],
     endDate: json['endDate'],
-    advisorRating: json['advisorRating'] ?? 0.0,
-    studentRating: json['studentRating'] ?? 0.0,
+    advisorRating: (json['advisorRating'] ?? 0.0).toDouble(),
+    studentRating: (json['studentRating'] ?? 0.0).toDouble(),
     evidencePath: json['evidencePath'] ?? ''
   );
 
@@ -99,6 +106,7 @@ class Advice {
     map['status'] = _status.displayName;
     map['advisorId'] = _advisorId;
     map['studentId'] = _studentId;
+    map['studentMajor'] = _studentMajor;
     map['startDate'] = _startDate;
     map['endDate'] = _endDate;
     map['advisorRating'] = _advisorRating;

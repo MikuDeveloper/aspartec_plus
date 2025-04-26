@@ -25,5 +25,6 @@ class Assets {
   static const String conversationPicture = 'assets/pictures/conversation_picture.svg';
   static const String ratingPicture = 'assets/pictures/rating_picture.svg';
   static const String confirmPicture = 'assets/pictures/confirm_picture.svg';
-  static const String uploadImagePicture = 'assets/pictures/upload_image_picture.svg';
+  static const String uploadPicture = 'assets/pictures/upload_picture.svg';
+  static const String statisticsPicture = 'assets/pictures/statistics_picture.svg';
 }

@@ -18,7 +18,7 @@ class NotificactionsListTile extends ConsumerWidget with PlatformFunctions {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final uid = ref.watch(currentUserProvider)!.uid;
+    final uid = ref.watch(currentUserProvider)?.uid;
     final status = ref.watch(notificationsStatusProvider);
     final statusNotifier = ref.read(notificationsStatusProvider.notifier);
 

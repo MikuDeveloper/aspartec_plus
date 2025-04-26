@@ -45,7 +45,8 @@ class LoginButton extends ConsumerWidget {
         ref.invalidate(advisorSubjectsProvider);
         ref.invalidate(availableSubjectsProvider);
         ref.invalidate(advisorsBySubjectProvider);
-        ref.invalidate(currentUserProvider);
+        //ref.invalidate(currentUserProvider);
+        ref.invalidate(reportProvider);
         if (context.mounted) context.goNamed('home');
       })
       .catchError((error) {

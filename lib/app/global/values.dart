@@ -14,6 +14,13 @@ final Set<String> majors = {
   'Ingeniería en Nanotecnología'
 };
 
+final List<String> months = [
+  'Enero', 'Febrero', 'Marzo',
+  'Abril', 'Mayo', 'Junio', 'Julio',
+  'Agosto', 'Septiembre', 'Octubre',
+  'Noviembre', 'Diciembre'
+];
+
 final formattedPhoneNumberRegex = RegExp(r'^\(\d{3}\)\s?\d{3}\-\d{4}$');
 final plainPhoneNumberRegex = RegExp(r'[^0-9]');
 final passwordRegex = RegExp(

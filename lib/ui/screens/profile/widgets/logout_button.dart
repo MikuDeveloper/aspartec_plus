@@ -22,8 +22,9 @@ class LogoutButton extends ConsumerWidget with PlatformFunctions {
           if (!result) return;
 
           if (context.mounted) Dialogs.showLoadingDialog(context);
-          await desactivateNotifications(currentUser!.uid);
+          await desactivateNotifications(currentUser?.uid);
           await userUseCase.logout();
+          //ref.read(currentUserProvider.notifier).state = null;
           if (context.mounted) {
             context.pop();
             context.goNamed('login');
