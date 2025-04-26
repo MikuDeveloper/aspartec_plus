@@ -16,7 +16,14 @@ class HomeScreen extends ConsumerWidget with PlatformFunctions {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUserData = ref.watch(userDataProvider(null));
-    final firebaseMessage = ref.watch(firebaseMessagesProvider).value;
+    final currentUser = ref.watch(currentUserProvider);
+    
+    ref.watch(firebaseMessagesProvider).whenData((remoteMeesage) {
+      final data = remoteMeesage.data;
+      final title = remoteMeesage.notification?.title ?? 'Cambios en las asesorías';
+      final filter = (Role.fromDisplayName(data['role'] ?? ''), AdviceStatus.fromDisplayName(data['status'] ?? ''));
+      MaterialBanners.showNotificationBanner(context, ref, title, filter);
+    });
 
     return currentUserData.when(
       skipLoadingOnReload: true,
@@ -24,17 +31,10 @@ class HomeScreen extends ConsumerWidget with PlatformFunctions {
       error: (error, stackTrace) => HomeErrorScreen(error: error.toString()),
       data: (aspartecUser) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          ref.read(currentUserProvider.notifier).state = aspartecUser;
-          activeNotifications(aspartecUser.uid);
-          if (firebaseMessage != null && context.mounted) {
-            final data = firebaseMessage.data;
-            final filter = (Role.fromDisplayName(data['role'] ?? ''), AdviceStatus.fromDisplayName(data['status'] ?? ''));
-            MaterialBanners.showNotificationBanner(
-              context,
-              ref,
-              firebaseMessage.notification?.title ?? 'Cambios en las asesorías',
-              filter,
-            );
+          debugPrint('User data: ${aspartecUser.uid}');
+          if (currentUser?.uid != aspartecUser.uid) {
+            ref.read(currentUserProvider.notifier).state = aspartecUser;
+            activeNotifications(aspartecUser.uid);
           }
         });
 

@@ -27,7 +27,7 @@ class EvidenceStepContent extends ConsumerWidget with ImageActions {
           constraints: BoxConstraints(maxHeight: 400),
           child: AspectRatio(
             aspectRatio: 4 /3,
-            child: evidence == null ? SvgPicture.asset(Assets.uploadImagePicture) : Image.memory(evidence),
+            child: evidence == null ? SvgPicture.asset(Assets.uploadPicture) : Image.memory(evidence),
           ),
         ),
         ElevatedButton.icon(

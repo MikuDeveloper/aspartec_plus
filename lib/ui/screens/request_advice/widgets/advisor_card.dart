@@ -1,5 +1,5 @@
 import 'package:aspartec_plus/app/global/values.dart' show defaultPadding;
-import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceProvider;
+import 'package:aspartec_plus/app/providers/home_providers.dart' show adviceProvider, currentUserProvider;
 import 'package:aspartec_plus/app/providers/use_cases_providers.dart' show adviceUseCaseProvider;
 import 'package:aspartec_plus/domain/models/aspartec_user.dart';
 import 'package:aspartec_plus/domain/models/subject.dart';
@@ -68,8 +68,9 @@ class AdvisorCard extends ConsumerWidget with AdviceFunctions {
 
   void requestAdvice(BuildContext context, WidgetRef ref, String topic) {
     final adviceUseCase = ref.read(adviceUseCaseProvider);
+    final user = ref.read(currentUserProvider.notifier).state;
     Dialogs.showLoadingDialog(context);
-    adviceUseCase.createAdvice(subject: subject.name, topic: topic, advisorId: advisor.uid)
+    adviceUseCase.createAdvice(subject: subject.name, topic: topic, advisorId: advisor.uid, studentMajor: user!.major)
       .then((_) {
         ref.invalidate(adviceProvider);
         if (context.mounted) {

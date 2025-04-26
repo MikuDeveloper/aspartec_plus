@@ -30,33 +30,39 @@ mixin PlatformFunctions {
     return 5;
   }
 
-  Future<void> activeNotifications(String uid) async {
-    if (!isMobile()) return;
+  Future<void> activeNotifications(String? uid) async {
+    if (!isMobile() || uid == null) return;
 
     final message = FirebaseMessaging.instance;
+    //await message.deleteToken();
     final prefs = SharedPreferencesAsync();
 
     // 0.
     final enabled = await prefs.getBool('notificationsEnabled') ?? false;
     if (enabled) return;
     // 1. Pedir permiso
-    final settings = await message.requestPermission();
+    final settings = await message.getNotificationSettings();
     // 2. Comprobar si se autorizó
     final authorizated = settings.authorizationStatus == AuthorizationStatus.authorized;
     // 3. Acciones si se autorizó 
     if (authorizated) {
+      //await message.deleteToken();
       await message.subscribeToTopic(uid);
       await prefs.setBool('notificationsEnabled', true);
+      print('Preferences: true, for: $uid');
+      print('Suscribed to: $uid');
     }
   }
 
-  Future<void> desactivateNotifications(String uid) async {
-    if (!isMobile()) return;
+  Future<void> desactivateNotifications(String? uid) async {
+    if (!isMobile() || uid == null) return;
 
     final message = FirebaseMessaging.instance;
     final prefs = SharedPreferencesAsync();
 
-    await prefs.setBool('notificationsEnabled', false);
+    await prefs.remove('notificationsEnabled');
+    //await message.deleteToken();
     await message.unsubscribeFromTopic(uid);
+    print('Preferences: ${await prefs.getBool('notificationsEnabled')}');
   }
 }
