@@ -35,7 +35,8 @@ class ProfileScreen extends StatelessWidget with PlatformFunctions {
               child: const ProfilePicture()
             ),
           ),
-          const NotificactionsListTile(),
+          if (isMobile())
+            const NotificactionsListTile(),
           ListTile(
             onTap: () => BottomSheets.openBottomSheet(context, const UpdatePasswordBottomSheet(), isDesktop()),
             leading: const Icon(Icons.key_rounded, color: Colors.blueAccent),

@@ -49,8 +49,6 @@ mixin PlatformFunctions {
       //await message.deleteToken();
       await message.subscribeToTopic(uid);
       await prefs.setBool('notificationsEnabled', true);
-      print('Preferences: true, for: $uid');
-      print('Suscribed to: $uid');
     }
   }
 
@@ -63,6 +61,5 @@ mixin PlatformFunctions {
     await prefs.remove('notificationsEnabled');
     //await message.deleteToken();
     await message.unsubscribeFromTopic(uid);
-    print('Preferences: ${await prefs.getBool('notificationsEnabled')}');
   }
 }

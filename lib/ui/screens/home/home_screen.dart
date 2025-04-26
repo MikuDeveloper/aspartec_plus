@@ -31,7 +31,6 @@ class HomeScreen extends ConsumerWidget with PlatformFunctions {
       error: (error, stackTrace) => HomeErrorScreen(error: error.toString()),
       data: (aspartecUser) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          debugPrint('User data: ${aspartecUser.uid}');
           if (currentUser?.uid != aspartecUser.uid) {
             ref.read(currentUserProvider.notifier).state = aspartecUser;
             activeNotifications(aspartecUser.uid);
