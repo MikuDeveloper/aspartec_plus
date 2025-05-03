@@ -61,8 +61,8 @@ class GeneralInformationChart extends StatelessWidget {
   List<PieChartSectionData>? _getSections() {
     if (report.adviceCount == 0) return null;
 
-    final canceledValue = (report.canceledAdvice * 100) / report.adviceCount;
-    final completedValue = (report.completedAdvice * 100) / report.adviceCount;
+    final canceledValue = ((report.canceledAdvice * 100) / report.adviceCount).roundToDouble();
+    final completedValue = ((report.completedAdvice * 100) / report.adviceCount).roundToDouble();
 
     return [
       PieChartSectionData(

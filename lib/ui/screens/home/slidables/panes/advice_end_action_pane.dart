@@ -37,7 +37,7 @@ class AdviceEndActionPane extends StatelessWidget {
         Visibility(
           visible: advice.status == AdviceStatus.opened && role == Role.student
             || advice.status == AdviceStatus.canceled && role == Role.advisor,
-          child: ReportUserSlidableAction(controller: controller)
+          child: ReportUserSlidableAction(controller: controller, adviceId: advice.id)
         ),
         Visibility(
           visible: advice.status == AdviceStatus.opened && role == Role.student,

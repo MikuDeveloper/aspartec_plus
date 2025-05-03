@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../domain/models/advice.dart';
 import '../../domain/repositories/advice_repository.dart';
-import '../helpers/constants.dart' show adviceCollection, evidencesPath;
+import '../helpers/constants.dart' show adviceCollection, adviceReportCollection, evidencesPath;
 
 class AdviceAdapter implements AdviceRepository {
   final _auth = FirebaseAuth.instance;
@@ -123,4 +123,19 @@ class AdviceAdapter implements AdviceRepository {
     }
   }
   
+  @override
+  Future<void> reportAdvice({required String id, required String message}) async {
+    try {
+      final docRef = _firestore.collection(adviceReportCollection).doc();
+      final batch = _firestore.batch();
+      batch.set(docRef, {
+        'id': docRef.id,
+        'adviceId': id,
+        'message': message
+      });
+      await batch.commit();
+    } on FirebaseException catch (e) {
+      throw getException(e.plugin, e.code);
+    }
+  }
 }

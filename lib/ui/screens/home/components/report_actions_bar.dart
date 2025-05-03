@@ -15,6 +15,7 @@ class ReportActionsBar extends ConsumerWidget with PlatformFunctions {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedMonth = ref.watch(selectedMonthProvider);
+    final report = ref.watch(reportProvider(selectedMonth));
     
     return SliverPadding(
       padding: EdgeInsets.symmetric(
@@ -33,7 +34,8 @@ class ReportActionsBar extends ConsumerWidget with PlatformFunctions {
                   RefreshIconButton(futureProvider: reportProvider(selectedMonth))
               ]
             ),
-            GenerateReportButton()
+            if (report.hasValue && report.requireValue.adviceCount > 0)
+              GenerateReportButton()
           ],
         )
       ),

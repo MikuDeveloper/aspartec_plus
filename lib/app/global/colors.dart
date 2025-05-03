@@ -14,11 +14,11 @@ const Color lightGreenCircle = Color(0xFFAADA8F);
 const Color blueCircle = Color(0xFF85B4FF);
 
 final Map<String, Color> majorColors = {
-  'Ingeniería en Sistemas Computacionales': const Color(0xFF3366FF), // Azul Brillante
-  'Ingeniería en Tecnologías de la Información': const Color(0xFFFF9933), // Naranja Intenso
-  'Ingeniería Mecatrónica': const Color(0xFF99CC33), // Verde Lima
-  'Ingeniería Industrial': const Color(0xFFFFCC00), // Amarillo Dorado
-  'Ingeniería en Gestión Empresarial': const Color(0xFFCC66FF), // Morado Vibrante
-  'Ingeniería Bioquímica': const Color(0xFF00CC99), // Turquesa Brillante
-  'Ingeniería en Nanotecnología': const Color(0xFFFF6666), // Rojo Coral
+  'Sistemas Computacionales': const Color(0xFF3366FF), // Azul Brillante
+  'Tecnologías de la Información': const Color(0xFFFF9933), // Naranja Intenso
+  'Mecatrónica': const Color(0xFF99CC33), // Verde Lima
+  'Industrial': const Color(0xFFFFCC00), // Amarillo Dorado
+  'Gestión Empresarial': const Color(0xFFCC66FF), // Morado Vibrante
+  'Bioquímica': const Color(0xFF00CC99), // Turquesa Brillante
+  'Nanotecnología': const Color(0xFFFF6666), // Rojo Coral
 };

@@ -51,27 +51,34 @@ class ReportInformation extends StatelessWidget {
         ),
         AverageRatingComponent(raiting: report.averageRaiting),
         const Divider(),
-        Wrap(
-          spacing: defaultPadding * 2,
-          runSpacing: defaultPadding,
-          alignment: WrapAlignment.spaceEvenly,
-          runAlignment: WrapAlignment.center,
-          children: [
-            Card(
-              elevation: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(defaultPadding / 2),
-                child: GeneralInformationChart(report: report),
+        Padding(
+          padding: const EdgeInsets.only(
+            left: defaultPadding,
+            bottom: defaultPadding,
+            right: defaultPadding
+          ),
+          child: Wrap(
+            spacing: defaultPadding * 2,
+            runSpacing: defaultPadding,
+            alignment: WrapAlignment.spaceEvenly,
+            runAlignment: WrapAlignment.center,
+            children: [
+              Card(
+                elevation: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(defaultPadding / 2),
+                  child: GeneralInformationChart(report: report),
+                )
+              ),
+              Card(
+                elevation: 3,
+                child: Padding(
+                  padding: const EdgeInsets.all(defaultPadding / 2),
+                  child: ByMajorChart(report: report),
+                )
               )
-            ),
-            Card(
-              elevation: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(defaultPadding / 2),
-                child: ByMajorChart(report: report),
-              )
-            )
-          ],
+            ],
+          ),
         )
       ],
     );

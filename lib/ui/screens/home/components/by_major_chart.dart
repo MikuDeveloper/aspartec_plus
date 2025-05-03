@@ -55,13 +55,13 @@ class ByMajorChart extends StatelessWidget {
   List<PieChartSectionData>? _getSections() {
     if (report.adviceCount == 0) return null;
 
-    final double sistemasValue = (report.adviceBySistemas * 100) / report.adviceCount;
-    final double ticsValue = (report.adviceByTics * 100) / report.adviceCount;
-    final double mecatronicaValue = (report.adviceByMecatronica * 100) / report.adviceCount;
-    final double industrialValue = (report.adviceByIndustrial * 100) / report.adviceCount;
-    final double gestionValue = (report.adviceByGestion * 100) / report.adviceCount;
-    final double bioquimicaValue = (report.adviceByBioquimica * 100) / report.adviceCount;
-    final double nanoValue = (report.adviceByNano * 100) / report.adviceCount;
+    final double sistemasValue = ((report.adviceBySistemas * 100) / report.adviceCount).roundToDouble();
+    final double ticsValue = ((report.adviceByTics * 100) / report.adviceCount).roundToDouble();
+    final double mecatronicaValue = ((report.adviceByMecatronica * 100) / report.adviceCount).roundToDouble();
+    final double industrialValue = ((report.adviceByIndustrial * 100) / report.adviceCount).roundToDouble();
+    final double gestionValue = ((report.adviceByGestion * 100) / report.adviceCount).roundToDouble();
+    final double bioquimicaValue = ((report.adviceByBioquimica * 100) / report.adviceCount).roundToDouble();
+    final double nanoValue = ((report.adviceByNano * 100) / report.adviceCount).roundToDouble();
 
     int count = 0;
     final colors = majorColors.values.toList();

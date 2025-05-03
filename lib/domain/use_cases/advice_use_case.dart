@@ -22,4 +22,5 @@ class AdviceUseCase {
 
   Future<void> cancelAdvice({required String id}) => _adviceRepository.cancelAdvice(id: id);
   Future<void> ratingAdvisor({required String id, required double rating}) => _adviceRepository.ratingAdvisor(id: id, rating: rating);
+  Future<void> reportAdvice({required String id, required String message}) => _adviceRepository.reportAdvice(id: id, message: message);
 }
