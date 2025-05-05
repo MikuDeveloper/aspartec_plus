@@ -13,4 +13,9 @@ mixin AdviceFunctions {
     final username = '${user.firstname} ${user.lastname1} ${user.lastname2}'.trim();
     return username;
   }
+
+  String getDate(DateTime date) {
+    final dateFormat = DateFormat('MMMM_yyyy', 'es').format(date);
+    return dateFormat;
+  }
 }

@@ -1,3 +1,7 @@
+import 'package:intl/intl.dart';
+
+import 'aspartec_user.dart';
+
 class Report {
   final DateTime _date;
   final double _averageRaiting;
@@ -51,6 +55,42 @@ class Report {
     _adviceByGestion = adviceByGestion,
     _adviceByBioquimica = adviceByBioquimica,
     _adviceByNano = adviceByNano;
+
+  factory Report.fromJson(Map<String, dynamic> json) => Report(
+      date: json['date'] ?? DateTime.now(),
+      averageRaiting: json['averageRaiting'] ?? 0.0,
+      adviceCount: json['adviceCount'] ?? 0,
+      completedAdvice: json['completedAdvice'] ?? 0,
+      canceledAdvice: json['canceledAdvice'] ?? 0,
+      adviceBySistemas: json['adviceBySistemas'] ?? 0,
+      adviceByTics: json['adviceByTics'] ?? 0,
+      adviceByMecatronica: json['adviceByMecatronica'] ?? 0,
+      adviceByIndustrial: json['adviceByIndustrial'] ?? 0,
+      adviceByGestion: json['adviceByGestion'] ?? 0,
+      adviceByBioquimica: json['adviceByBioquimica'] ?? 0,
+      adviceByNano: json['adviceByNano'] ?? 0
+    );
+
+  Map<String, dynamic> toJsonForm(AspartecUser user, List<String> advisorSubjects) {
+    final map = <String, dynamic>{};
+    map['advisor'] = '${user.firstname} ${user.lastname1} ${user.lastname2}'.trim();
+    map['date'] = DateFormat('dd/MMMM/yyyy', 'es').format(_date);
+    map['controlNumber'] = user.controlNumber;
+    map['major'] = user.major;
+    map['averageRating'] = _averageRaiting.toStringAsFixed(1);
+    map['subjects'] = '${advisorSubjects.join(', ')}.';
+    map['adviceCount'] = _adviceCount.toString();
+    map['completedAdvice'] = _completedAdvice.toString();
+    map['canceledAdvice'] = _canceledAdvice.toString();
+    map['bySistemas'] = _adviceBySistemas.toString();
+    map['byTics'] = _adviceByTics.toString();
+    map['byMeca'] = _adviceByMecatronica.toString();
+    map['byIndustrial'] = _adviceByIndustrial.toString();
+    map['byGestion'] = _adviceByGestion.toString();
+    map['byBioquimica'] = _adviceByBioquimica.toString();
+    map['byNano'] = _adviceByNano.toString();
+    return map;
+  }
         
   Report copyWith({
     DateTime? date,

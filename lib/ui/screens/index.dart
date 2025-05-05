@@ -7,3 +7,4 @@ export './register_subject/register_subject_screen.dart';
 export './request_advice/request_advice_screen.dart';
 export './close_advice/close_advice_screen.dart';
 export './available_advisors/available_advisors_screen.dart';
+export './report_view/report_view_screen.dart';

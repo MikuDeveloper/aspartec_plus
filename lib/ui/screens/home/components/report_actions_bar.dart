@@ -35,7 +35,7 @@ class ReportActionsBar extends ConsumerWidget with PlatformFunctions {
               ]
             ),
             if (report.hasValue && report.requireValue.adviceCount > 0)
-              GenerateReportButton()
+              GenerateReportButton(report: report.value!)
           ],
         )
       ),

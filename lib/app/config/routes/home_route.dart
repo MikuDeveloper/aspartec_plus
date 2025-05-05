@@ -7,6 +7,7 @@ import 'close_advice_route.dart';
 import 'forgot_password_route.dart';
 import 'profile_route.dart';
 import 'register_subject_route.dart';
+import 'report_view_route.dart';
 import 'request_advice_route.dart';
 
 final homeRoute = GoRoute(
@@ -33,6 +34,7 @@ final homeRoute = GoRoute(
     profileRoute,
     forgotPasswordHomeRoute,
     closeAdviceRoute,
-    availableAvisorsRoute
+    availableAvisorsRoute,
+    reportViewRoute
   ]
 );

@@ -59,7 +59,7 @@ mixin PlatformFunctions {
     final prefs = SharedPreferencesAsync();
 
     await prefs.remove('notificationsEnabled');
-    //await message.deleteToken();
+    await message.deleteToken();
     await message.unsubscribeFromTopic(uid);
   }
 }

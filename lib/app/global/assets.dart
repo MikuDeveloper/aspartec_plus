@@ -1,6 +1,9 @@
 class Assets {
   const Assets._();
 
+  static const String reportTemplatePdf = 'assets/docs/report_template.pdf';
+  static const String reportTemplateV2Pdf = 'assets/docs/report_template_v2.pdf';
+
   static const String itschLogo = 'assets/logos/itsch_logo.svg';
   static const String aspartecLightLogo = 'assets/logos/aspartec_light_logo.png';
   static const String aspartecDarkLogo = 'assets/logos/aspartec_dark_logo.png';
