@@ -14,7 +14,7 @@ class ReportAdapter implements ReportRepository {
 
   @override
   Future<Report> getGeneralReport() {
-    // TODO: implement getGeneralReport
+    
     throw UnimplementedError();
   }
 

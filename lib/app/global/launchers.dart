@@ -1,9 +1,10 @@
 import 'package:aspartec_plus/ui/shared/index.dart' show Dialogs;
+import 'package:flutter/material.dart' show BuildContext;
 import 'package:url_launcher/url_launcher.dart';
 
 class Launchers {
   static Future<bool?> openWhatsApp({
-    required context,
+    required BuildContext context,
     required String phoneNumber,
     required String name,
     required String subject,
@@ -19,7 +20,7 @@ class Launchers {
       await launchUrl(Uri.parse(url));
       return true;
     } else {
-      Dialogs.showInformativeDialog(context, 'No se pudo abrir WhatsApp, intenta ponerte en contacto con tu asesor a través del número proporcionado: $phoneNumber.');
+      if (context.mounted) Dialogs.showInformativeDialog(context, 'No se pudo abrir WhatsApp, intenta ponerte en contacto con tu asesor a través del número proporcionado: $phoneNumber.');
       return false;
     }
   }

@@ -20,7 +20,7 @@ class AdvisorSubjectsList extends ConsumerWidget with PlatformFunctions {
       skipLoadingOnReload: true,
       skipLoadingOnRefresh: !isDesktop(),
       loading: () => SliverLoading(),
-      error: (error, __) => SliverError(error: error.toString(), futureProvider: userDataProvider(null)),
+      error: (error, _) => SliverError(error: error.toString(), futureProvider: userDataProvider(null)),
       data: (subjects) => SliverGrid.builder(
         itemCount: subjects.length,
         itemBuilder: (context, index) => EntryAnimation(

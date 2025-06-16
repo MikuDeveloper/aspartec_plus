@@ -39,7 +39,7 @@ class _ReportViewScreenState extends ConsumerState<ReportViewScreen> with Advice
     super.dispose();
   }
 
-  _generateReport(ByteData bytes) async {
+  Future<void> _generateReport(ByteData bytes) async {
     templateDoc = PdfDocument(inputBytes: bytes.buffer.asUint8List());
     PdfForm form = templateDoc!.form;
     final fields = form.fields;

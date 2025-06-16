@@ -10,6 +10,16 @@ Therefore, this app is designed to improve academic advice sharing at ITSCH.
 
 ![ITSCH](/assets/readme/itsch_logo.png)
 
+## How start?
+
+1. Linking a Firebase project.
+2. Activate Firestore, Email authentication and Storage.
+3. Running the commands ```flutter pub get``` and then ```flutter run```
+
+---
+
+- You can take a look the documentation at the [Firebase Documentation](https://firebase.google.com/docs/build?hl=es)
+
 ## Pictures and icons credits
 
 - [Flaticon](https://www.flaticon.com/)
